@@ -33,3 +33,5 @@ flyctl deploy --config ./fly.dev.toml
 npm install --force --legacy-peer-deps
  
  Comentario
+
+ flyctl deploy --local-only
