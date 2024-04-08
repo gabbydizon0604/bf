@@ -20291,3 +20291,9 @@ input {
 .iti__selected-flag dropdown-toggle {
     width: 100% !important;
 }
+
+/* Landing */
+html .header .header-inner .header-menu .main-menu.segundo .login {
+    display: contents !important;
+}
+
