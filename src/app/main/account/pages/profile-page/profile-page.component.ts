@@ -31,6 +31,7 @@ export class ProfilePageComponent implements OnInit {
     ])
       .pipe(
         takeUntil(this._unsubscribeAll)
+
       )
       .subscribe((rest: any) => {
         console.log(rest)
@@ -45,4 +46,11 @@ export class ProfilePageComponent implements OnInit {
         }
       });
   }
+
+  ngOnDestroy() {
+    if (this._unsubscribeAll !== undefined) {
+      this._unsubscribeAll.unsubscribe();
+    }
+  }
+
 }

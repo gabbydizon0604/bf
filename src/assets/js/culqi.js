@@ -41,5 +41,6 @@ Culqi.options({
 });
 
 function suscribirseCulqi() {
-    Culqi.open();
+    // Culqi.open();
+    console.log("Cambios")
 }

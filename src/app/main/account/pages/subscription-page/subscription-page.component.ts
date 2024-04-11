@@ -10,7 +10,7 @@ import { ScriptService } from 'src/app/shared/service/script.service';
 import { SwalAlertService } from 'src/app/shared/service/swal-alert.service';
 import { AccountService } from '../../services/account.service';
 
-declare function suscribirseCulqi(): any;
+// declare function suscribirseCulqi(): any;
 
 @Component({
   selector: 'app-subscription-page',
@@ -118,7 +118,7 @@ export class SubscriptionPageComponent implements OnInit, AfterViewInit, OnDestr
   }
 
   registrarSuscripcion(): void {
-    suscribirseCulqi();
+    // suscribirseCulqi();
   }
 
   cancelarSuscripcion(): void {

@@ -10,7 +10,7 @@ import { appAnimations } from 'src/app/shared/utils/animation';
 import { AuthService } from '../../services/auth.service';
 import { ForgorPasswordService } from '../../services/forgor-password.service';
 
-declare function suscribirseCulqi(): any;
+// declare function suscribirseCulqi(): any;
 
 @Component({
   selector: 'app-reset-password',
