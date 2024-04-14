@@ -40,7 +40,8 @@
                             "src/assets/js/components/lightbox.js",
                             "src/assets/js/isotope.pkgd.min.js",
                             "src/assets/js/theme.js",
-                            "src/assets/js/culqi.js"
+                            "src/assets/js/culqi.js",
+                            "src/assets/js/metaAds.js"
 
                         ]
                     },
