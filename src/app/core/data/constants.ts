@@ -29,6 +29,9 @@ export class Constantes {
             recuperarPasswordEmail: '/api/forgorpassword/recuperarPasswordEmail',
             resetPassword: '/api/forgorpassword/resetPassword',
         },
+        prioridadpartidos: {
+            getCriterio: '/api/prioridadpartidos/getCriterio'
+        },
     }
     static culqi = {
         auth: {
