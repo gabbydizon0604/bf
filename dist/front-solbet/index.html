@@ -320,7 +320,23 @@
         </div>
     </fuse-splash-screen>
     <app-root></app-root>
+<<<<<<< HEAD
 
 <script src="runtime.6d4a7ebf164aeca8.js" type="module"></script><script src="polyfills.61cc2ee4713cf771.js" type="module"></script><script src="scripts.e2f21ca13b8f6145.js" defer></script><script src="main.defdc1394d49960c.js" type="module"></script>
+=======
+    <script src="https://checkout.culqi.com/js/v4"></script>
+    <script>
+        function culqi() {
+            if (Culqi.token) {
+                var payment_event = new CustomEvent("payment_event", {
+                    detail: Culqi.token,
+                });
+                document.dispatchEvent(payment_event);
+                document.getElementById("culqi_checkout_frame").remove();
+            }
+        }
+    </script>
+<script src="runtime.7b2652986324d83e.js" type="module"></script><script src="polyfills.61cc2ee4713cf771.js" type="module"></script><script src="scripts.782f08305c261e5c.js" defer></script><script src="main.ac14a546c384054b.js" type="module"></script>
+>>>>>>> 8d78d129bb4d02f3254b044da3783df3f35c1852
 
 </body></html>

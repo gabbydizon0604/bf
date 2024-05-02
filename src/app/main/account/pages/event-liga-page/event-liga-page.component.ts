@@ -462,10 +462,17 @@ export class EventLigaPageComponent implements OnInit {
             id: element,
             descripcion: element
           })
-          let numero = element.split('-')[1]
+          let numero = 0
+          if (element.includes("-")){
+            numero = element.split('-')[1]
+          }else{
+            numero = element.split('-')[0]
+          }
           if (max < numero)
             max = numero;
         });
+        console.log("max")
+        console.log(max)
         this.strSeason = strSeasonAll
 
         if (isQueryParams) {
