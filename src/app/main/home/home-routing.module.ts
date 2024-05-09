@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { TerminoCondicionesComponent } from 'src/app/shared/pages/terminos-condiciones/terminos-condiciones.component';
+
 
 const routes: Routes = [
   {
@@ -16,7 +18,8 @@ const routes: Routes = [
   {
     path: 'contacto', 
     component: ContactPageComponent
-  }
+  },
+  {path: 'termino-condiciones', component: TerminoCondicionesComponent},
   /*{
     path: '**',//TODO 404 cuando no existe la ruta
     redirectTo: '/tracks'

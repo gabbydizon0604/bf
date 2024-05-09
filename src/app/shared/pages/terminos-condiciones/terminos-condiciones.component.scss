@@ -1,0 +1,61 @@
+.overlay-popup {
+    background-color: rgba(59, 61, 80, .5);
+}
+
+.formulario-reclamaciones {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+}
+
+.formulario-reclamaciones h2 {
+    color: #333;
+}
+
+.formulario-reclamaciones input,
+.formulario-reclamaciones select,
+.formulario-reclamaciones textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.boton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.boton:hover {
+    background-color: #45a049;
+}
+
+input[type="radio"]+label span {
+    transition: background .2s, transform .2s;
+}
+
+input[type="radio"]+label span:hover,
+input[type="radio"]+label:hover span {
+    transform: scale(1.2);
+}
+
+input[type="radio"]:checked+label span {
+    background-color: #3490DC; //bg-blue
+    box-shadow: 0px 0px 0px 2px white inset;
+}
+
+input[type="radio"]:checked+label {
+    color: #3490DC; //text-blue
+}
+
+.body-terminos-condiciones{
+    padding: 20px !important ;
+    padding-top: 120px !important;
+}
