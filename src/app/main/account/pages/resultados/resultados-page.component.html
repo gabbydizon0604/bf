@@ -51,7 +51,7 @@
 
             <div class="d-flex justify-content-center row">
                 <div class="pb-2 bd-highlight col-lg-3 col-sm-6">
-                    <label class="form-label">Liga</label>
+                    <label class="form-label">Liga <i class="bi bi-info-circle"></i></label>
                     <select class="form-select" (change)="onChange()" [(ngModel)]="strLeagueSelected">
                             <option *ngFor="let op of strLeague" [value]="op.id">
                                 {{op.descripcion}}
@@ -59,10 +59,10 @@
                     </select>
                 </div>
                 <div class="pb-2 bd-highlight col-lg-3 col-sm-6">
-                    <label class="form-label">Fecha</label>
+                    <label class="form-label">Fecha <i class="bi bi-info-circle"></i></label>
                     <select class="form-select"  (change)="filtrarResultados()" [(ngModel)]="strFechaSelected">
-                            <option *ngFor="let op of strFecha" [value]="op">
-                                {{op}}
+                            <option *ngFor="let op of strFecha" [value]="op.id">
+                                {{op.descripcion}}
                               </option> 
                     </select>
                 </div>
@@ -70,37 +70,45 @@
 
             
             <div class="d-flex justify-content-center row">
-                <div class="pb-2 bd-highlight col-lg-3 col-sm-6">
+                <div class="pb-2 bd-highlight col-lg-4 col-sm-6">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover table-custom" style="font-size: 14px !important; ">
                             <thead class="thead-custom">
                                 <tr class="header-custom thead-custom">
                                     <td colspan="2" class="left-cell">Resumen</td>
-                                    <td >Esq.</td>
-                                    <td >Gol</td>
-                                    <td >Tiro Puerta</td>
-                                    <td class="rigth-cell">Tarj.</td>
+                                    <td class="text-center">Esq.</td>
+                                    <td class="text-center">Gol</td>
+                                    <td class="text-center">Tiro Puerta</td>
+                                    <td class="rigth-cell text-center">Tarj.</td>
                                 </tr>
-                                <tr>
+                                <tr class="header-custom thead-custom">
+                                    <td colspan="2" ></td>
+                                    <th *ngIf="verSoloResultados" class="text-center" scope="col">+7.5</th>
+                                    <th *ngIf="verSoloResultados" class="text-center" scope="col">+1.5</th>
+                                    <th *ngIf="verSoloResultados" class="text-center" scope="col">+6.5</th>
+                                    <th *ngIf="verSoloResultados" class="text-center" scope="col">+2.5</th>
+                                </tr>
+
+                                <tr >
                                     <td colspan="2" class="header-custom thead-custom" >Aciertos</td>
-                                    <td >{{resumenAciertos.cornersAciertoResumen}}</td>
-                                    <td >{{resumenAciertos.golesAciertoResumenoResumen}}</td>
-                                    <td >{{resumenAciertos.tirosAciertoResumen}}</td>
-                                    <td >{{resumenAciertos.tarjetasAciertoResumen}}</td>
+                                    <td class="labelAzulResultado">{{resumenAciertos.cornersAciertoResumen}}</td>
+                                    <td class="labelAzulResultado">{{resumenAciertos.golesAciertoResumen}}</td>
+                                    <td class="labelAzulResultado">{{resumenAciertos.tirosAciertoResumen}}</td>
+                                    <td class="labelAzulResultado">{{resumenAciertos.tarjetasAciertoResumen}}</td>
                                 </tr>
-                                <tr>
+                                <tr >
                                     <td colspan="2" class="header-custom thead-custom">Fallos</td>
-                                    <td >{{resumenFallos.cornersFalloResumen}}</td>
-                                    <td >{{resumenFallos.golesFalloResumenoResumen}}</td>
-                                    <td >{{resumenFallos.tirosFalloResumen}}</td>
-                                    <td >{{resumenFallos.tarjetasFalloResumen}}</td>
+                                    <td class="labelRojoResultado">{{resumenFallos.cornersFalloResumen}}</td>
+                                    <td class="labelRojoResultado">{{resumenFallos.golesFalloResumenoResumen}}</td>
+                                    <td class="labelRojoResultado">{{resumenFallos.tirosFalloResumen}}</td>
+                                    <td class="labelRojoResultado">{{resumenFallos.tarjetasFalloResumen}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" class="header-custom thead-custom">% Acierto</td>
-                                    <td style="font-weight: bold;">{{resumenPorcentaje.corners}} %</td>
-                                    <td style="font-weight: bold;">{{resumenPorcentaje.goles}} %</td>
-                                    <td style="font-weight: bold;">{{resumenPorcentaje.tiros}} %</td>
-                                    <td style="font-weight: bold;">{{resumenPorcentaje.tarjetas}} %</td>
+                                    <td style="font-weight: bold; font-size: 18px !important;" class="text-center">{{resumenPorcentaje.corners}} %</td>
+                                    <td style="font-weight: bold; font-size: 18px !important;" class="text-center">{{resumenPorcentaje.goles}} %</td>
+                                    <td style="font-weight: bold; font-size: 18px !important;" class="text-center">{{resumenPorcentaje.tiros}} %</td>
+                                    <td style="font-weight: bold; font-size: 18px !important;" class="text-center">{{resumenPorcentaje.tarjetas}} %</td>
                                 </tr>
                             </thead>
                             <tbody> </tbody>
@@ -388,10 +396,10 @@
                                     <td *ngIf="!verSoloResultados" [ngClass]="{ 'labelRojo': item.labelTirosaporteriaLocalProb5==='rojo' , 'labelAmarilloSuave' : item.labelTirosaporteriaLocalProb5==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelTirosaporteriaLocalProb5==='amarilloIntenso', 'labelVerdeSuave' : item.labelTirosaporteriaLocalProb5==='verdeSuave', 'labelVerdeIntenso' : item.labelTirosaporteriaLocalProb5==='verdeIntenso'} ">{{item.tirosaporteriaLocalProb5}}%</td>
                                     <td *ngIf="!verSoloResultados" [ngClass]="{ 'labelRojo': item.labelTarjetasLocalProb2==='rojo' , 'labelAmarilloSuave' : item.labelTarjetasLocalProb2==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelTarjetasLocalProb2==='amarilloIntenso', 'labelVerdeSuave' : item.labelTarjetasLocalProb2==='verdeSuave', 'labelVerdeIntenso' : item.labelTarjetasLocalProb2==='verdeIntenso'} ">{{item.tarjetasLocalProb2}}%</td>
 
-                                    <td *ngIf="verSoloResultados"   [ngClass]="{ 'labelAzulResultado': item.labelCornerstotalesresultado==='azul', 'labelRojoResultado' : item.labelCornerstotalesresultado==='rojo' } ">{{item.cornerstotalesresultado}}</td>
-                                    <td *ngIf="verSoloResultados"   [ngClass]="{ 'labelAzulResultado': item.labelGolestotalesresultado==='azul', 'labelRojoResultado' : item.labelGolestotalesresultado==='rojo' } ">{{item.golestotalesresultado}}</td>
-                                    <td *ngIf="verSoloResultados"   [ngClass]="{ 'labelAzulResultado': item.labelTirosaporteriatotalresultado==='azul' , 'labelRojoResultado' : item.labelTirosaporteriatotalresultado==='rojo' } ">{{item.tirosaporteriatotalresultado}}</td>
-                                    <td *ngIf="verSoloResultados"   [ngClass]="{ 'labelAzulResultado': item.labelTarjetastotalresultado==='azul' , 'labelRojoResultado' : item.labelTarjetastotalresultado==='rojo' } ">{{item.tarjetastotalresultado}}</td>
+                                    <td *ngIf="verSoloResultados" class="labelResultado"  [ngClass]="{ 'labelAzulResultado': item.labelCornerstotalesresultado==='azul', 'labelRojoResultado' : item.labelCornerstotalesresultado==='rojo' } ">{{item.cornerstotalesresultado}}</td>
+                                    <td *ngIf="verSoloResultados" class="labelResultado"  [ngClass]="{ 'labelAzulResultado': item.labelGolestotalesresultado==='azul', 'labelRojoResultado' : item.labelGolestotalesresultado==='rojo' } ">{{item.golestotalesresultado}}</td>
+                                    <td *ngIf="verSoloResultados" class="labelResultado"  [ngClass]="{ 'labelAzulResultado': item.labelTirosaporteriatotalresultado==='azul' , 'labelRojoResultado' : item.labelTirosaporteriatotalresultado==='rojo' } ">{{item.tirosaporteriatotalresultado}}</td>
+                                    <td *ngIf="verSoloResultados" class="labelResultado"  [ngClass]="{ 'labelAzulResultado': item.labelTarjetastotalresultado==='azul' , 'labelRojoResultado' : item.labelTarjetastotalresultado==='rojo' } ">{{item.tarjetastotalresultado}}</td>
 
                                 </tr>
 

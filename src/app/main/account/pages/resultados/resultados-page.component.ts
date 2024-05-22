@@ -22,6 +22,7 @@ export class ResultadosPageComponent implements OnInit {
 
   strLeague: any[] = [];
   strLeagueSelected: any;
+  strFechaAll: any;
   strFecha: any;
   strFechaSelected: any;
   resumenAciertos: any;
@@ -74,15 +75,22 @@ export class ResultadosPageComponent implements OnInit {
           this.strLeagueSelected = null
           this.suscriptoCulqi = true;
           this.mensajeSuscriptoCulqi = '';
-          this.getData()
+
+          // Fecha 
+          this.strFechaAll = rest[0].strFecha;
+          this.generarFilterFecha();
+
+          this.strFechaSelected = null;
+          const criterioBusqueda = {
+            strLeague: this.strLeagueSelected
+          };
+          this.getData(criterioBusqueda)
         }
       });
   }
 
-  getData() {
-    const criterioBusqueda = {
-      strLeague: this.strLeagueSelected
-    };
+  getData(criterioBusqueda: any) {
+
     forkJoin([
       this._resultadosService.obtenerListado(criterioBusqueda),
     ])
@@ -107,7 +115,7 @@ export class ResultadosPageComponent implements OnInit {
           element = this.calcularLabelResultado(element, 'tarjetastotalresultado')
         });
 
-        this.strFecha = [...new Set(rest[0].resResult.map((item:any) => item.fecha))];
+        // this.strFecha = [...new Set(rest[0].resResult.map((item:any) => item.fecha))];
         this.calcularResumen(rest[0].resResult);
 
         rest[0].resResult.forEach((element: any) => {
@@ -145,7 +153,44 @@ export class ResultadosPageComponent implements OnInit {
   }
 
   onChange(): void {
-    this.getData();
+    // this.getData();
+
+    this.generarFilterFecha();
+    this.strFechaSelected = null;
+    const criterioBusqueda = {
+      strLeague: this.strLeagueSelected
+    };
+    this.getData(criterioBusqueda)
+  }
+
+  generarFilterFecha() {
+    let strFechaFilter: any[] = [{
+      id: null,
+      descripcion: 'Todas'
+    }];
+    console.log("this.strLeagueSelected")
+    console.log(this.strLeagueSelected)
+    let strFechaFiltered = []
+    if(this.strLeagueSelected){
+      const newLista = this.strFechaAll.filter((x:any) => x.liga == this.strLeagueSelected);
+      strFechaFiltered = [...new Set(newLista.map((item:any) => item.fecha))];
+    }else{
+      strFechaFiltered = [...new Set(this.strFechaAll.map((item:any) => item.fecha))];
+    }
+     
+    console.log("strFechaFiltered")
+    console.log(strFechaFiltered)
+
+    strFechaFiltered.forEach((element: any) => {
+      strFechaFilter.push({
+        id: element,
+        descripcion: element
+      })
+    });
+    console.log("strFechaFiltered")
+    console.log(strFechaFiltered)
+
+    this.strFecha = strFechaFilter
   }
 
   calcularLabelPorcentajes(element: any, atributo: any, label:any):void {
@@ -199,6 +244,8 @@ export class ResultadosPageComponent implements OnInit {
       const golesAciertoResumen =  listaRegistros.filter((x:any) => x.labelGolestotalesresultado == 'azul').length;
       const tirosAciertoResumen =  listaRegistros.filter((x:any) => x.labelTirosaporteriatotalresultado == 'azul').length;
       const tarjetasAciertoResumen =  listaRegistros.filter((x:any) => x.labelTarjetastotalresultado == 'azul').length;
+      console.log("golesAciertoResumen")
+      console.log(golesAciertoResumen)
       this.resumenAciertos = {
         cornersAciertoResumen: cornersAciertoResumen,
         golesAciertoResumen: golesAciertoResumen,
@@ -219,10 +266,10 @@ export class ResultadosPageComponent implements OnInit {
       }
 
       this.resumenPorcentaje = {
-        corners: ((cornersAciertoResumen * 100 )/( cornersAciertoResumen + cornersFalloResumen)) || 0,
-        goles: ((golesAciertoResumen * 100 )/( golesAciertoResumen + golesFalloResumenoResumen)) || 0,
-        tiros:((tirosAciertoResumen * 100 )/( tirosAciertoResumen + tirosFalloResumen)) || 0,
-        tarjetas: ((tarjetasAciertoResumen * 100 )/( tarjetasAciertoResumen + tarjetasFalloResumen)) || 0,
+        corners: Math.round(((cornersAciertoResumen * 100 )/( cornersAciertoResumen + cornersFalloResumen))) || 0,
+        goles: Math.round(((golesAciertoResumen * 100 )/( golesAciertoResumen + golesFalloResumenoResumen))) || 0,
+        tiros:Math.round(((tirosAciertoResumen * 100 )/( tirosAciertoResumen + tirosFalloResumen))) || 0,
+        tarjetas: Math.round(((tarjetasAciertoResumen * 100 )/( tarjetasAciertoResumen + tarjetasFalloResumen))) || 0,
       }
   }
 
@@ -268,12 +315,16 @@ export class ResultadosPageComponent implements OnInit {
   }
 
   filtrarResultados(): void {
-    // this.cargarTemporadas(false);
-    // this.strFechaSelected = null;
-    this.tableroPosiciones = this.datosOriginales.filter((x:any) => x.fecha == this.strFechaSelected);
-    console.log(this.tableroPosiciones);
-    this.calcularResumen(this.tableroPosiciones);
+    // this.tableroPosiciones = this.datosOriginales.filter((x:any) => x.fecha == this.strFechaSelected);
+    console.log("this.strFechaSelected");
+    console.log(this.strFechaSelected);
+    const criterioBusqueda = {
+      strLeague: this.strLeagueSelected,
+      strFecha: this.strFechaSelected
+    };
+    this.getData(criterioBusqueda)
+    // this.calcularResumen(this.tableroPosiciones);
 
-    // this.cargarEquipos(false);
+
   }
 }

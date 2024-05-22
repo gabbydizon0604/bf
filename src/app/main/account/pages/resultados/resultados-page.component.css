@@ -11,15 +11,6 @@
     border-bottom: 4px solid #fdbd00 !important;
 }
 
-.match-list-wrap .match-list-item .tipoApuessta {
-    padding: 0 0 0 17px;
-    background: url("../../../../../assets/images/check.png") 0 50% no-repeat;
-    margin-left: 40px;
-    font-size: 14px;
-    color: #fff;
-    font-family: 'Work Sans';
-}
-
 .match-list-wrap .match-list-item .opcionApuesta {
     margin: 0;
 }
@@ -250,6 +241,8 @@ body {
     -webkit-text-fill-color: #800020;
     -webkit-text-stroke-color: #800020;
     -webkit-text-stroke-width: 1px;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .labelAmarilloSuave {
@@ -258,6 +251,8 @@ body {
     -webkit-text-fill-color: #654321;
     -webkit-text-stroke-color: #654321;
     -webkit-text-stroke-width: 1px;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .labelAmarilloIntenso {
@@ -266,6 +261,8 @@ body {
     -webkit-text-fill-color: #654321;
     -webkit-text-stroke-color: #654321;
     -webkit-text-stroke-width: 1px;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .labelVerdeSuave {
@@ -274,6 +271,8 @@ body {
     -webkit-text-fill-color: #228B22;
     -webkit-text-stroke-color: #228B22;
     -webkit-text-stroke-width: 1px;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .labelVerdeIntenso {
@@ -282,6 +281,8 @@ body {
     -webkit-text-fill-color: #228B22;
     -webkit-text-stroke-color: #228B22;
     -webkit-text-stroke-width: 1px;
+    vertical-align: middle;
+    text-align: center;
 }
 
 .labelAzulResultado {
@@ -290,11 +291,23 @@ body {
     -webkit-text-fill-color: #0070c0;
     -webkit-text-stroke-color: #0070c0;
     -webkit-text-stroke-width: 1px;
+    font-size: 18px !important;
+    vertical-align: middle;
+    text-align: center;
 }
 .labelRojoResultado {
     background-color: #ffffff;
-    color: #800020 !important;
-    -webkit-text-fill-color: #800020;
-    -webkit-text-stroke-color: #800020;
+    color: red !important;
+    -webkit-text-fill-color: red;
+    -webkit-text-stroke-color: red;
     -webkit-text-stroke-width: 1px;
+    font-size: 18px !important;
+    vertical-align: middle;
+    text-align: center;
+
+}
+
+.labelResultado {
+    vertical-align: middle;
+    text-align: center;
 }
