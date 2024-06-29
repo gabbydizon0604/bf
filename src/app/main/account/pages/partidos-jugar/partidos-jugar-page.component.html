@@ -219,7 +219,7 @@
                                 </tr>
                                 <tr class="header-custom thead-custom">
                                     <th colspan="4 " class=""> </th>
-                                    <th colspan="2" class="text-center">Posición de tabla</th>
+                                    <!-- <th colspan="2" class="text-center">Posición de tabla</th> -->
                                     <th colspan="1 " class=""> </th>
 
                                 </tr>
@@ -229,8 +229,8 @@
                                     <th scope="col" class="columna-fija">Equipo Local</th>
                                     <th scope="col" class="columna-fija">Equipo Visitante</th>
 
-                                    <th scope="col">Local</th>
-                                    <th scope="col">Visita</th>
+                                    <!-- <th scope="col">Local</th>
+                                    <th scope="col">Visita</th> -->
                                     <th scope="col" class="columna-fija"> </th>
 
                                 </tr>
@@ -239,7 +239,7 @@
                                 <tr class="accordion-toggle content-table" *ngFor="let item of tableroPosiciones">
 
                                     <td class="columna-fija celdaAsignadofecha">{{item.fecha}}</td>
-                                    <td class="columna-fija celdaAsignado">{{item.liga}}</td>
+                                    <td class="columna-fija celdaAsignado"><img src="{{item.pais_imagen}}" width="25" height="25">{{item.liga}}</td>
                                     <td class="columna-fija celdaAsignado">
                                         <img src="{{item.home_image}}" width="25" height="25">
                                         
@@ -248,9 +248,9 @@
                                         <img src="{{item.away_image}}" width="25" height="25">
                                         
                                         {{item.equipoVisitante}}</td>
-                                    
+<!--                                     
                                     <td [ngClass]="{ 'colorPosicionLocalPrimeros': item.colorPosicionLocal==='colorPosicionLocalPrimeros' , 'colorPosicionLocalSegundos' : item.colorPosicionLocal==='colorPosicionLocalSegundos'  , 'colorPosicionLocalTerceros' : item.colorPosicionLocal==='colorPosicionLocalTerceros' , 'colorPosicionLocalCuartos' : item.colorPosicionLocal==='colorPosicionLocalCuartos'} ">{{item.posicionLocal}}</td>
-                                    <td [ngClass]="{ 'colorPosicionLocalPrimeros': item.colorPosicionVisita==='colorPosicionLocalPrimeros' , 'colorPosicionLocalSegundos' : item.colorPosicionVisita==='colorPosicionLocalSegundos'  , 'colorPosicionLocalTerceros' : item.colorPosicionVisita==='colorPosicionLocalTerceros' , 'colorPosicionLocalCuartos' : item.colorPosicionVisita==='colorPosicionLocalCuartos'} ">{{item.posicionVisita}}</td>
+                                    <td [ngClass]="{ 'colorPosicionLocalPrimeros': item.colorPosicionVisita==='colorPosicionLocalPrimeros' , 'colorPosicionLocalSegundos' : item.colorPosicionVisita==='colorPosicionLocalSegundos'  , 'colorPosicionLocalTerceros' : item.colorPosicionVisita==='colorPosicionLocalTerceros' , 'colorPosicionLocalCuartos' : item.colorPosicionVisita==='colorPosicionLocalCuartos'} ">{{item.posicionVisita}}</td> -->
 
                                     <td class="columna-fija celdaAsignadoEstadisticas">
                                         <strong>

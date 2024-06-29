@@ -1,129 +1,3 @@
-.uk-push-1-4 {
-    left: 0% !important;
-}
-
-.uk-width-medium-3-4 {
-    width: 100%;
-}
-
-.match-list-item {
-    border-left: 4px solid #fdbd00 !important;
-    border-bottom: 4px solid #fdbd00 !important;
-}
-
-.match-list-wrap .match-list-item .tipoApuessta {
-    padding: 0 0 0 17px;
-    background: url("../../../../../assets/images/check.png") 0 50% no-repeat;
-    margin-left: 40px;
-    font-size: 14px;
-    color: #fff;
-    font-family: 'Work Sans';
-}
-
-.match-list-wrap .match-list-item .opcionApuesta {
-    margin: 0;
-}
-
-.match-list-wrap .match-list-item .opcionApuesta br {
-    display: none;
-}
-
-.membership {
-    color: white;
-}
-
-.match-list-wrap {
-    background: transparent;
-}
-
-.card-header-title {
-    background: #0f1f39;
-    color: white;
-}
-
-.list-group-item-custom {
-    padding: 0px !important;
-}
-
-.formulario {
-    padding-top: 0px !important;
-    margin-top: 0px !important;
-}
-
-.item-top {
-    background: #f8f8f8;
-    padding-top: 0px !important;
-    padding-bottom: 0px !important;
-}
-
-.item-bottom {
-    color: white;
-}
-
-.border-lateral {
-    border-left: 10px solid #87cc7c !important;
-}
-
-.border-inferior {
-    border-top: 1px solid #87cc7c !important;
-}
-
-.liga {
-    font-style: normal;
-    font-size: 17px;
-    font-weight: 500;
-}
-
-.fecha {
-    font-style: normal;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.opcionApuesta {
-    font-style: normal;
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.mercadoApuesta {
-    font-size: 15px;
-    font-style: initial;
-    font-weight: 500;
-}
-
-.cuotaSimple {
-    font-size: 15px;
-    font-style: initial;
-    font-weight: 700;
-}
-
-.equipos {
-    font-size: 15px;
-    font-style: initial;
-    font-weight: 400;
-}
-
-.cuotaCombinada {
-    font-size: 18px;
-    font-style: initial;
-    font-weight: 700;
-}
-
-.uk-container {
-    box-sizing: border-box;
-    padding: 0 8px !important;
-}
-
-.uk-breadcrumb {
-    margin-bottom: 12px !important;
-}
-
-.go-to-membresia {
-    color: #87cc7c;
-    font-weight: 600;
-    font-size: 16px;
-}
 
 .celdaAsignado {
     word-break: break-all !important;
@@ -163,16 +37,7 @@
 .hiddenRow {
     padding: 0 !important;
 }
-
-body {
-    padding-top: 50px;
-    background-color: #34495e;
-}
-
-.hiddenRow {
-    padding: 0 !important;
-}
-
+ 
 .table-custom {
     font-size: 10px !important;
 }
@@ -191,7 +56,7 @@ body {
 }
 
 .colorPosicionLocalPrimeros {
-    background-color: #5a8ac6;
+    background-color: #5a8ac6 !important;;
     color: white !important;
     -webkit-text-fill-color: #f9f9f9;
     -webkit-text-stroke-color: #fafafa;
@@ -199,7 +64,7 @@ body {
 }
 
 .colorPosicionLocalPrimeros {
-    background-color: #5a8ac6;
+    background-color: #5a8ac6 !important;;
     color: white !important;
     -webkit-text-fill-color: #f9f9f9;
     -webkit-text-stroke-color: #fafafa;
@@ -207,7 +72,7 @@ body {
 }
 
 .colorPosicionLocalSegundos {
-    background-color: #90b0d9;
+    background-color: #90b0d9 !important;;
     color: white !important;
     -webkit-text-fill-color: #f9f9f9;
     -webkit-text-stroke-color: #fafafa;
@@ -215,7 +80,7 @@ body {
 }
 
 .colorPosicionLocalTerceros {
-    background-color: #fa9b9d;
+    background-color: #fa9b9d !important;;
     color: white !important;
     -webkit-text-fill-color: #f9f9f9;
     -webkit-text-stroke-color: #fafafa;
@@ -223,12 +88,13 @@ body {
 }
 
 .colorPosicionLocalCuartos {
-    background-color: #f8696b;
+    background-color: #f8696b !important;;
     color: white !important;
     -webkit-text-fill-color: #f9f9f9;
     -webkit-text-stroke-color: #fafafa;
     -webkit-text-stroke-width: 1px;
 }
+
 
 .linkEstadisticas {
     color: blue
@@ -245,7 +111,7 @@ body {
 }
 
 .labelRojo {
-    background-color: #FF9999;
+    background-color: #FF9999 !important;;
     color: #800020 !important;
     -webkit-text-fill-color: #800020;
     -webkit-text-stroke-color: #800020;
@@ -253,7 +119,7 @@ body {
 }
 
 .labelAmarilloSuave {
-    background-color: #FADFAD;
+    background-color: #FADFAD !important;;
     color: #654321 !important;
     -webkit-text-fill-color: #654321;
     -webkit-text-stroke-color: #654321;
@@ -261,7 +127,7 @@ body {
 }
 
 .labelAmarilloIntenso {
-    background-color: #FADFAD;
+    background-color: #FADFAD !important;;
     color: #654321 !important;
     -webkit-text-fill-color: #654321;
     -webkit-text-stroke-color: #654321;
@@ -269,7 +135,7 @@ body {
 }
 
 .labelVerdeSuave {
-    background-color: #B4D7B4;
+    background-color: #B4D7B4 !important;;
     color: #228B22 !important;
     -webkit-text-fill-color: #228B22;
     -webkit-text-stroke-color: #228B22;
@@ -277,13 +143,12 @@ body {
 }
 
 .labelVerdeIntenso {
-    background-color: #B4D7B4;
+    background-color: #B4D7B4 !important;;
     color: #228B22 !important;
     -webkit-text-fill-color: #228B22;
     -webkit-text-stroke-color: #228B22;
     -webkit-text-stroke-width: 1px;
 }
-
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: #4c4c4c;
+.border-right{
+    border-right-width: 5px !important;
 }

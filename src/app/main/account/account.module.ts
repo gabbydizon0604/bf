@@ -8,6 +8,7 @@ import { EventLigaPageComponent } from './pages/event-liga-page/event-liga-page.
 import { TableroPosicionesPageComponent } from './pages/tablero-posiciones-page/tablero-posiciones-page.component';
 import { PartidosJugarPageComponent } from './pages/partidos-jugar/partidos-jugar-page.component';
 import { ResultadosPageComponent } from './pages/resultados/resultados-page.component';
+import { DetallePrediccionesComponent } from './pages/shared/detalle-prediccion/detalle-prediccion.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ResultadosPageComponent } from './pages/resultados/resultados-page.comp
     EventLigaPageComponent,
     TableroPosicionesPageComponent,
     PartidosJugarPageComponent,
-    ResultadosPageComponent
+    ResultadosPageComponent,
+    DetallePrediccionesComponent
   ],
   imports: [
     CommonModule,
@@ -27,5 +29,8 @@ import { ResultadosPageComponent } from './pages/resultados/resultados-page.comp
   providers: [
     DatePipe
   ],
+  exports: [
+    DetallePrediccionesComponent
+  ]
 })
 export class AccountModule { }

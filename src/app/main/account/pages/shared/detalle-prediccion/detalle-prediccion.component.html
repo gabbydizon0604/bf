@@ -1,0 +1,447 @@
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-custom accordion">
+        <thead class="thead-custom">
+            <tr class="header-custom thead-custom">
+                <!-- NO XS -->
+                <th *ngIf="sizeScreen=='lg'" colspan="7" class="left-cell"> </th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" colspan="4" class="text-center border-right">Probabilidad: Equipo Local + Visitante</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" colspan="4" class="text-center border-right">Probabilidad: Equipo Local</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" colspan="4" class="text-center rigth-cell">Probabilidad: Equipo Visitante</th>
+    
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" colspan="8" class="text-center">Total del partido</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" colspan="4" class="text-center rigth-cell">Primer tiempo</th>
+    
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" colspan="10" class="text-center ">Total del partido</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" colspan="6" class="text-center  rigth-cell">Primer tiempo</th>
+    
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" colspan="8" class="text-center rigth-cell  left-cell ">Total del partido</th>
+                
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" colspan="10" class="text-center rigth-cell  left-cell ">Total del partido</th>
+                
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" colspan="6" class="text-center ">Total del partido</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" colspan="6" class="text-center  rigth-cell">Primer tiempo</th>
+    
+                <!-- XS -->
+                <th colspan="4" *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" class="left-cell"> </th>
+                <th colspan="4" *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'">Probabilidad Equ. L + V</th>
+
+            </tr>
+            <tr class="header-custom thead-custom">
+
+                <!-- NO XS -->
+                <th *ngIf="sizeScreen=='lg'" colspan="4 " class=""> </th>
+                <th *ngIf="sizeScreen=='lg'" colspan="2" class="text-center">Posición de tabla</th>
+                <th *ngIf="sizeScreen=='lg'" colspan="1 " class=""> </th>
+    
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" colspan="1" class="text-center">Esq.</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" colspan="1" class="text-center">Gol</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" colspan="1" class="text-center">Tiro Puerta</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" colspan="1" class="text-center border-right">Tarj.</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" rowspan="1" class="text-center">Esq.</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" rowspan="1" class="text-center">Gol</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" rowspan="1" class="text-center">Tiro Puerta</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" rowspan="1" class="text-center" class="border-right">Tarj.</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" rowspan="1" class="text-center">Esq.</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" rowspan="1" class=" text-center">Gol</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" rowspan="1" class=" text-center">Tiro Puerta</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" rowspan="1" class=" text-center">Tarj.</th>
+    
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" colspan="4" class="text-center">Local + Visita</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" colspan="2" class="text-center">Local</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" colspan="2" class="text-center">Visita</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg' " colspan="2" class="text-center">Local + Visita</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" colspan="1" class="text-center">Local</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg' " colspan="1" class="text-center">Visita</th>
+    
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg' " colspan="4" class="text-center">Local + Visita</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" colspan="3" class="text-center">Local</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg' " colspan="3" class="text-center">Visita</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg' " colspan="2" class="text-center">Local + Visita</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" colspan="2" class="text-center">Local</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" colspan="2" class="text-center">Visita</th>
+    
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" colspan="4" class="text-center">Local + Visita</th>
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" colspan="2" class="text-center">Local</th>
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" colspan="2" class="text-center">Visita</th>
+    
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" colspan="4" class="text-center">Local + Visita</th>
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" colspan="3" class="text-center">Local</th>
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" colspan="3" class="text-center">Visita</th>
+    
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" colspan="3" class="text-center">1x2</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" colspan="3" class="text-center">Doble Chance</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" colspan="3" class="text-center">1x2</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" colspan="3" class="text-center">Doble Chance</th>
+
+                <!-- XS -->
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" colspan="4" class="n-borde-r"> </th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" colspan="1" class="text-center">Corner</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" colspan="1" class=" text-center">Gol</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" colspan="1" class=" text-center">Tiro Puerta</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" colspan="1" class=" text-center">Tarj.</th>
+                
+            </tr>
+            <tr class="header-custom thead-custom" *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" > 
+                <th colspan="7" class=""> </th>
+                <th colspan="" class="">Local</th>
+                <th colspan="" class="">Emp</th>
+                <th colspan="" class="">Visita</th>
+                <th colspan="" class="">LoE</th>
+                <th colspan="" class="">LoV</th>
+                <th colspan="" class="">EoV</th>
+                <th colspan="" class="">Local</th>
+                <th colspan="" class="">Emp</th>
+                <th colspan="" class="">Visita</th>
+                <th colspan="" class="">LoE</th>
+                <th colspan="" class="">LoV</th>
+                <th colspan="" class="">EoV</th>
+            </tr>
+            <tr class="header-custom thead-custom">
+                
+                <!-- NO XS -->
+                <th *ngIf="sizeScreen=='lg'" scope="col" class="columna-fija">Fecha</th>
+                <th *ngIf="sizeScreen=='lg'" scope="col" class="columna-fija">Liga</th>
+                <th *ngIf="sizeScreen=='lg'" scope="col" class="columna-fija">Equipo Local</th>
+                <th *ngIf="sizeScreen=='lg'" scope="col" class="columna-fija">Equipo Visitante</th>
+    
+                <th *ngIf="sizeScreen=='lg'" scope="col">Local</th>
+                <th *ngIf="sizeScreen=='lg'" scope="col">Visita</th>
+                <th *ngIf="sizeScreen=='lg'" scope="col" class="columna-fija"> </th>
+    
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col">+7.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col">+1.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col">+6.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col" class="border-right">+2.5</th>
+    
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col">+0.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col" class="border-right">+1.5</th>
+    
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col">+0.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" scope="col">+1.5</th>
+    
+                <!-- GOles -->
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+1.5</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+2.5</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">AM</th>
+    
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+0.5</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+1.5</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+0.5</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+1.5</th>
+    
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+0.5</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+1.5</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+0.5</th>
+                <th *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" scope="col">+0.5</th>
+    
+                <!-- Corners -->
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+7.5</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+8.5</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+9.5</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+10.5</th>
+    
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+4.5</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+5.5</th>
+    
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+4.5</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+5.5</th>
+    
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+4.5</th>
+    
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+2.5</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+3.5</th>
+    
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+2.5</th>
+                <th *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" scope="col">+3.5</th>
+    
+                <!-- Tarjetas -->
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" scope="col">+2.5</th>
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" scope="col">+4.5</th>
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" scope="col">Ambos</th>
+    
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" scope="col">+1.5</th>
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" scope="col">+2.5</th>
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" scope="col">+1.5</th>
+                <th *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" scope="col">+2.5</th>
+    
+                <!-- TirosArco -->
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" scope="col">+6.5</th>
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" scope="col">+7.5</th>
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" scope="col">+8.5</th>
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" scope="col">+9.5</th>
+    
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" scope="col">+4.5</th>
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" scope="col">+5.5</th>
+    
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" scope="col">+3.5</th>
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" scope="col">+4.5</th>
+                <th *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" scope="col">+5.5</th>
+                
+                <!-- Ganador -->
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">1</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">X</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">2</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">1X</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">12</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">X2</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">1</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">X</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">2</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">1X</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">12</th>
+                <th *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" scope="col">X2</th>
+
+                <!-- XS -->
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" scope="col" class="columna-fija">Fecha</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" scope="col" class="columna-fija">Equipo Local</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" scope="col" class="columna-fija">Equipo Visitante</th>
+                <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" class="columna-fija celdaAsignado"> </td>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" scope="col">+7.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" scope="col">+1.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" scope="col">+6.5</th>
+                <th *ngIf="tipoMercado=='Resumen' && sizeScreen=='xs'" scope="col">+2.5</th>
+    
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="sizeScreen=='lg'"> 
+                <tr class="accordion-toggle content-table" *ngFor="let item of tableroPosiciones"  >
+    
+                    <td class="columna-fija celdaAsignadofecha">{{item.fecha}}</td>
+                    <td class="columna-fija celdaAsignado">{{item.liga}}</td>
+                    <td class="columna-fija celdaAsignado">{{item.equipoLocal}}</td>
+                    <td class="columna-fija celdaAsignado">{{item.equipoVisitante}}</td>
+                    
+                    <td [ngClass]="{ 'colorPosicionLocalPrimeros': item.colorPosicionLocal==='colorPosicionLocalPrimeros' , 'colorPosicionLocalSegundos' : item.colorPosicionLocal==='colorPosicionLocalSegundos'  , 'colorPosicionLocalTerceros' : item.colorPosicionLocal==='colorPosicionLocalTerceros' , 'colorPosicionLocalCuartos' : item.colorPosicionLocal==='colorPosicionLocalCuartos'} ">{{item.posicionLocal}}</td>
+                    <td [ngClass]="{ 'colorPosicionLocalPrimeros': item.colorPosicionVisita==='colorPosicionLocalPrimeros' , 'colorPosicionLocalSegundos' : item.colorPosicionVisita==='colorPosicionLocalSegundos'  , 'colorPosicionLocalTerceros' : item.colorPosicionVisita==='colorPosicionLocalTerceros' , 'colorPosicionLocalCuartos' : item.colorPosicionVisita==='colorPosicionLocalCuartos'} ">{{item.posicionVisita}}</td>
+        
+                    <td class="columna-fija celdaAsignadoEstadisticas">
+                        <strong>
+                        <a class="linkEstadisticas" [routerLink]="['/cuenta/estadisticas']" [queryParams]="{liga:item.liga ,idHomeTeam:item.idHomeTeam, equipoLocal: item.equipoLocal, idAwayTeam: item.idAwayTeam, equipoVisitante: item.equipoVisitante }"> <i class="bi bi-clipboard-data"></i></a>
+                        </strong>
+                    </td>
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelCornersProbabilidadMas7==='rojo' , 'labelAmarilloSuave' : item.labelCornersProbabilidadMas7==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelCornersProbabilidadMas7==='amarilloIntenso', 'labelVerdeSuave' : item.labelCornersProbabilidadMas7==='verdeSuave', 'labelVerdeIntenso' : item.labelCornersProbabilidadMas7==='verdeIntenso'} ">{{item.cornersProbabilidadMas7}}%</td>
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelGolesProbabilidadMas1==='rojo' , 'labelAmarilloSuave' : item.labelGolesProbabilidadMas1==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelGolesProbabilidadMas1==='amarilloIntenso', 'labelVerdeSuave' : item.labelGolesProbabilidadMas1==='verdeSuave', 'labelVerdeIntenso' : item.labelGolesProbabilidadMas1==='verdeIntenso'} ">{{item.golesProbabilidadMas1}}%</td>
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelTirosaporteriaProb6==='rojo' , 'labelAmarilloSuave' : item.labelTirosaporteriaProb6==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelTirosaporteriaProb6==='amarilloIntenso', 'labelVerdeSuave' : item.labelTirosaporteriaProb6==='verdeSuave', 'labelVerdeIntenso' : item.labelTirosaporteriaProb6==='verdeIntenso'} ">{{item.tirosaporteriaProb6}}%</td>
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelTarjetasProbabilidad3==='rojo' , 'labelAmarilloSuave' : item.labelTarjetasProbabilidad3==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelTarjetasProbabilidad3==='amarilloIntenso', 'labelVerdeSuave' : item.labelTarjetasProbabilidad3==='verdeSuave', 'labelVerdeIntenso' : item.labelTarjetasProbabilidad3==='verdeIntenso'} " class="border-right">{{item.tarjetasProbabilidad3}}%</td>
+                    
+                    <!-- <td>{{item.cornersHechoTotalesLocalVisita}}</td>
+                    <td>{{item.golesHechoTotalesLocalVisita}}</td>
+                    <td>{{item.tirosaporteriaTotalProm}}</td>
+                    <td >{{item.tarjetasTotalProm}}</td> -->
+        
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelCornersLocalProbMas5==='rojo' , 'labelAmarilloSuave' : item.labelCornersLocalProbMas5==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelCornersLocalProbMas5==='amarilloIntenso', 'labelVerdeSuave' : item.labelCornersLocalProbMas5==='verdeSuave', 'labelVerdeIntenso' : item.labelCornersLocalProbMas5==='verdeIntenso'} ">{{item.cornersLocalProbMas5}}%</td>
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelGolesLocalProbMas1==='rojo' , 'labelAmarilloSuave' : item.labelGolesLocalProbMas1==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelGolesLocalProbMas1==='amarilloIntenso', 'labelVerdeSuave' : item.labelGolesLocalProbMas1==='verdeSuave', 'labelVerdeIntenso' : item.labelGolesLocalProbMas1==='verdeIntenso'} ">{{item.golesLocalProbMas1}}%</td>
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelTirosaporteriaLocalProb5==='rojo' , 'labelAmarilloSuave' : item.labelTirosaporteriaLocalProb5==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelTirosaporteriaLocalProb5==='amarilloIntenso', 'labelVerdeSuave' : item.labelTirosaporteriaLocalProb5==='verdeSuave', 'labelVerdeIntenso' : item.labelTirosaporteriaLocalProb5==='verdeIntenso'} ">{{item.tirosaporteriaLocalProb5}}%</td>
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelTarjetasLocalProb2==='rojo' , 'labelAmarilloSuave' : item.labelTarjetasLocalProb2==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelTarjetasLocalProb2==='amarilloIntenso', 'labelVerdeSuave' : item.labelTarjetasLocalProb2==='verdeSuave', 'labelVerdeIntenso' : item.labelTarjetasLocalProb2==='verdeIntenso'} " class="border-right">{{item.tarjetasLocalProb2}}%</td>
+        
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelCornersLocalProbMas5==='rojo' , 'labelAmarilloSuave' : item.labelCornersLocalProbMas5==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelCornersLocalProbMas5==='amarilloIntenso', 'labelVerdeSuave' : item.labelCornersLocalProbMas5==='verdeSuave', 'labelVerdeIntenso' : item.labelCornersLocalProbMas5==='verdeIntenso'} ">{{item.cornersVisitaProbMas3}}%</td>
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelGolesLocalProbMas1==='rojo' , 'labelAmarilloSuave' : item.labelGolesLocalProbMas1==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelGolesLocalProbMas1==='amarilloIntenso', 'labelVerdeSuave' : item.labelGolesLocalProbMas1==='verdeSuave', 'labelVerdeIntenso' : item.labelGolesLocalProbMas1==='verdeIntenso'} ">{{item.golesVisitaProbMas0}}%</td>
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelTirosaporteriaLocalProb5==='rojo' , 'labelAmarilloSuave' : item.labelTirosaporteriaLocalProb5==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelTirosaporteriaLocalProb5==='amarilloIntenso', 'labelVerdeSuave' : item.labelTirosaporteriaLocalProb5==='verdeSuave', 'labelVerdeIntenso' : item.labelTirosaporteriaLocalProb5==='verdeIntenso'} ">{{item.tirosaporteriaVisitaProb3}}%</td>
+                    <td *ngIf="tipoMercado=='Resumen' && sizeScreen=='lg'" [ngClass]="{ 'labelRojo': item.labelTarjetasLocalProb2==='rojo' , 'labelAmarilloSuave' : item.labelTarjetasLocalProb2==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelTarjetasLocalProb2==='amarilloIntenso', 'labelVerdeSuave' : item.labelTarjetasLocalProb2==='verdeSuave', 'labelVerdeIntenso' : item.labelTarjetasLocalProb2==='verdeIntenso'} ">{{item.tarjetasVisitaProb1}}%</td>
+        
+                    <!-- GOles -->
+        
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.goles.mas1}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.goles.mas2}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.goles.mas3}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.goles.aem}}%</td>
+        
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.totalPartido.local.goles.mas0}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.totalPartido.local.goles.mas1}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.totalPartido.visita.goles.mas0}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.totalPartido.visita.goles.mas1}}%</td>
+                    
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.primerTiempo.ambosEquipos.goles.mas0}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.primerTiempo.ambosEquipos.goles.mas1}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.primerTiempo.local.goles.mas0}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaGoles' && sizeScreen=='lg'" >{{item.primerTiempo.visita.goles.mas0}}%</td>
+                    
+                    <!-- Corners -->
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.corners.mas7}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.corners.mas8}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.corners.mas9}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.corners.mas10}}%</td>
+        
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.totalPartido.local.corners.mas3}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.totalPartido.local.corners.mas4}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.totalPartido.local.corners.mas5}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.totalPartido.visita.corners.mas3}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.totalPartido.visita.corners.mas4}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.totalPartido.visita.corners.mas5}}%</td>
+        
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.primerTiempo.ambosEquipos.corners.mas3}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.primerTiempo.ambosEquipos.corners.mas4}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.primerTiempo.local.corners.mas2}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.primerTiempo.local.corners.mas3}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.primerTiempo.visita.corners.mas2}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaCorners' && sizeScreen=='lg'" >{{item.primerTiempo.visita.corners.mas3}}%</td>
+        
+                    <!-- Tarjetas -->
+                    <td *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.tarjetas.mas2}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.tarjetas.mas3}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.tarjetas.mas4}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.tarjetas.aem}}%</td>
+        
+                    <td *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" >{{item.totalPartido.local.tarjetas.mas1}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" >{{item.totalPartido.local.tarjetas.mas2}}%</td>
+        
+                    <td *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" >{{item.totalPartido.visita.tarjetas.mas1}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTarjetas' && sizeScreen=='lg'" >{{item.totalPartido.visita.tarjetas.mas2}}%</td>
+                    
+        
+                    
+                    <!-- TiroArco -->
+                    <td *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.tirosArco.mas6}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.tirosArco.mas7}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.tirosArco.mas8}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" >{{item.totalPartido.ambosEquipos.tirosArco.mas9}}%</td>
+        
+                    <td *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" >{{item.totalPartido.local.tirosArco.mas3}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" >{{item.totalPartido.local.tirosArco.mas4}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" >{{item.totalPartido.local.tirosArco.mas5}}%</td>
+        
+                    <td *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" >{{item.totalPartido.visita.tirosArco.mas3}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" >{{item.totalPartido.visita.tirosArco.mas4}}%</td>
+                    <td *ngIf="tipoMercado=='ProbaTiroArco' && sizeScreen=='lg'" >{{item.totalPartido.visita.tirosArco.mas5}}%</td>
+                    
+                    <!-- Ganador -->
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.totalPartido?.unox2?.local_uno}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.totalPartido?.unox2?.emp_x}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.totalPartido?.unox2?.visita_dos}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.totalPartido?.doble_chance?.loe}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.totalPartido?.doble_chance?.lov}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.totalPartido?.doble_chance?.eov}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.primerTiempo?.unox2?.local_uno}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.primerTiempo?.unox2?.emp_x}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.primerTiempo?.unox2?.visita_dos}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.primerTiempo?.doble_chance?.loe}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.primerTiempo?.doble_chance?.lov}}%</td>
+                    <td *ngIf="tipoMercado=='Ganador' && sizeScreen=='lg'" >{{item.primerTiempo?.doble_chance?.eov}}%</td>
+        
+                </tr>
+            </ng-container>
+            <ng-container *ngIf="sizeScreen=='xs'">
+                <ng-container *ngFor="let item of tableroPosiciones; let i=index;"> 
+                    <tr data-bs-toggle="collapse" [attr.data-bs-target]="'#r'+ i" class="accordion-toggle content-table" >
+    
+                        <td class="columna-fija celdaAsignado">{{item.fecha}}</td>
+                        <td class="columna-fija celdaAsignado">{{item.equipoLocal}}</td>
+                        <td class="columna-fija celdaAsignado">{{item.equipoVisitante}}</td>
+                        <td class="columna-fija celdaAsignadoEstadisticas">
+                            <strong>
+                                <a class="linkEstadisticas" [routerLink]="['/cuenta/estadisticas']" [queryParams]="{liga:item.liga ,idHomeTeam:item.idHomeTeam, equipoLocal: item.equipoLocal, idAwayTeam: item.idAwayTeam, equipoVisitante: item.equipoVisitante }"> <i class="bi bi-clipboard-data"></i></a>
+                            </strong>
+                        </td>
+                        <td class="celdaAsignado" [ngClass]="{ 'labelRojo': item.labelCornersProbabilidadMas7==='rojo' , 'labelAmarilloSuave' : item.labelCornersProbabilidadMas7==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelCornersProbabilidadMas7==='amarilloIntenso', 'labelVerdeSuave' : item.labelCornersProbabilidadMas7==='verdeSuave', 'labelVerdeIntenso' : item.labelCornersProbabilidadMas7==='verdeIntenso'} ">{{item.cornersProbabilidadMas7}}%</td>
+                        <td class="celdaAsignado" [ngClass]="{ 'labelRojo': item.labelGolesProbabilidadMas1==='rojo' , 'labelAmarilloSuave' : item.labelGolesProbabilidadMas1==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelGolesProbabilidadMas1==='amarilloIntenso', 'labelVerdeSuave' : item.labelGolesProbabilidadMas1==='verdeSuave', 'labelVerdeIntenso' : item.labelGolesProbabilidadMas1==='verdeIntenso'} ">{{item.golesProbabilidadMas1}}%</td>
+                        <td class="celdaAsignado" [ngClass]="{ 'labelRojo': item.labelTirosaporteriaProb6==='rojo' , 'labelAmarilloSuave' : item.labelTirosaporteriaProb6==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelTirosaporteriaProb6==='amarilloIntenso', 'labelVerdeSuave' : item.labelTirosaporteriaProb6==='verdeSuave', 'labelVerdeIntenso' : item.labelTirosaporteriaProb6==='verdeIntenso'} ">{{item.tirosaporteriaProb6}}%</td>
+                        <td class="celdaAsignado" [ngClass]="{ 'labelRojo': item.labelTarjetasProbabilidad3==='rojo' , 'labelAmarilloSuave' : item.labelTarjetasProbabilidad3==='amarilloSuave'  , 'labelAmarilloIntenso' : item.labelTarjetasProbabilidad3==='amarilloIntenso', 'labelVerdeSuave' : item.labelTarjetasProbabilidad3==='verdeSuave', 'labelVerdeIntenso' : item.labelTarjetasProbabilidad3==='verdeIntenso'} ">{{item.tarjetasProbabilidad3}}%</td>
+                    </tr>
+                    <tr class="collapse accordion-collapse" [attr.id]="'r'+ i" data-bs-parent=".table">
+                        <td colspan="6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead class="thead-custom">
+                                            <tr class="header-custom thead-custom">
+                                                <th colspan="1" class="left-cell"> </th>
+                                                <th colspan="2" class="rigth-cell text-center">Tabla de Posiciones</th>
+                                            </tr>
+                                            <tr class="header-custom thead-custom">
+                                                <th scope="col" class="columna-fija ">Liga</th>
+                                                <th scope="col">Pos. Local</th>
+                                                <th scope="col">Pos. Visita</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="accordion-toggle content-table">
+                                                <td class="columna-fija celdaAsignado">{{item.liga}}</td>
+                                                <td class="columna-fija celdaAsignado">{{item.posicionLocal}}</td>
+                                                <td class="columna-fija celdaAsignado">{{item.posicionVisita}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+        
+                            </div>
+        
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead class="thead-custom">
+                                            <tr class="header-custom thead-custom">
+                                                <th colspan="2" class="left-cell text-center">Tiros de esquina Equipo Local (promedio)</th>
+                                                <th colspan="2" class="rigth-cell text-center">Tiros de esquina Equipo Visitante (promedio)</th>
+                                            </tr>
+                                            <tr class="header-custom thead-custom">
+                                                <th scope="col">Hechos</th>
+                                                <th scope="col">Recibido</th>
+                                                <th scope="col">Recibido</th>
+                                                <th scope="col">Hechos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="accordion-toggle content-table">
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead class="thead-custom">
+                                            <tr class="header-custom thead-custom">
+                                                <th rowspan="2" class="left-rigth-cell text-center">Total de tiros de esquina hechos del Local más Visitante (promedio)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="accordion-toggle content-table">
+                                                <td>{{item.cornersHechoTotalesLocalVisita}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead class="thead-custom">
+                                            <tr class="header-custom thead-custom">
+                                                <th colspan="2" class="left-cell text-center">Goles Equipo Local (promedio)</th>
+                                                <th colspan="2" class="rigth-cell text-center">Goles Equipo Visitante (promedio)</th>
+                                            </tr>
+                                            <tr class="header-custom thead-custom">
+                                                <th scope="col">Hechos</th>
+                                                <th scope="col">Recibidos</th>
+                                                <th scope="col">Recibidos</th>
+                                                <th scope="col">Hechos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="accordion-toggle content-table">
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+
+        </tbody>
+    </table>
+</div> 

@@ -62,5 +62,13 @@ export class TableroPosicionesModel {
     public pais_imagen: string;
 
 
-    
+    // Nuevo 2024 06 09
+    public cornersVisitaProbMas3: Number;
+    public golesVisitaProbMas0: Number;
+    public tirosaporteriaVisitaProb3: Number;
+    public tarjetasVisitaProb1: Number;
+
+    public totalPartido: any;
+    public primerTiempo: any;
+
 }

@@ -3,6 +3,7 @@ import { RecommendationsService } from '../../services/recommendations.service';
 import { forkJoin, merge, Subject, takeUntil, BehaviorSubject, fromEvent, debounceTime } from 'rxjs';
 import { TableroPosicionesModel } from 'src/app/core/models/tableroLiga.model';
 import { TableroPosicionesService } from '../../services/tableroPosiciones.service';
+import { DetallePrediccionesComponent } from '../shared/detalle-prediccion/detalle-prediccion.component';
 
 @Component({
   selector: 'app-tablero-posiciones-page',
@@ -21,10 +22,13 @@ export class TableroPosicionesPageComponent implements OnInit {
 
   strLeague: any[] = [];
   strLeagueSelected: any;
+  activeTab:any = 'Resumen';
+  tipoMercado: any = 'Mercado';
 
   public screenWidth$: BehaviorSubject<any> = new BehaviorSubject(null);
   public mediaBreakpoint$: BehaviorSubject<any> = new BehaviorSubject(null);
   private _unsubscriber$: Subject<any> = new Subject();
+  
 
   constructor(
     private _tableroPosicionesService: TableroPosicionesService,
@@ -203,4 +207,10 @@ export class TableroPosicionesPageComponent implements OnInit {
   ngOnDestroy() {
     this._unsubscriber$.complete();
   }
+
+  cambiarTab(activeTab: any): void {
+    this.activeTab = activeTab;
+  }
+
+
 }
