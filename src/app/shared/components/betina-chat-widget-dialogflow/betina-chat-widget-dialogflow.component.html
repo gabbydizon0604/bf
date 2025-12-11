@@ -1,0 +1,70 @@
+<div class="betina-chat-widget-dialogflow">
+  <!-- Chat Button -->
+  <button 
+    class="chat-button" 
+    (click)="toggleChat()"
+    [class.open]="isOpen"
+    aria-label="Abrir chat con Betina">
+    <svg *ngIf="!isOpen" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg *ngIf="isOpen" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="chat-badge" *ngIf="!isOpen">Betina</span>
+  </button>
+
+  <!-- Dialogflow Messenger (iframe) -->
+  <div class="chat-window" [class.open]="isOpen" *ngIf="dialogflowConfig && dialogflowConfig.useIframe && dialogflowConfig.enabled && dialogflowConfig.projectId">
+    <div class="chat-window-header">
+      <div class="chat-header-content">
+        <div class="chat-avatar">B</div>
+        <div class="chat-header-info">
+          <h3>Betina</h3>
+          <p>Asistente de Recomendaciones</p>
+        </div>
+      </div>
+      <button class="close-button" (click)="toggleChat()" aria-label="Cerrar chat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Dialogflow Messenger Component -->
+    <df-messenger
+      [attr.project-id]="dialogflowConfig?.projectId || ''"
+      [attr.agent-id]="dialogflowConfig?.agentId || dialogflowConfig?.projectId || ''"
+      [attr.language-code]="dialogflowConfig?.languageCode || 'es'"
+      [attr.location-id]="dialogflowConfig?.location || 'us-central1'"
+      intent="WELCOME"
+      chat-title="Betina"
+      placeholder="Escribe tu mensaje..."
+      minimal="false">
+    </df-messenger>
+  </div>
+
+  <!-- Fallback message if Dialogflow not configured -->
+  <div class="chat-window" [class.open]="isOpen" *ngIf="!dialogflowConfig || !dialogflowConfig.enabled || !dialogflowConfig.projectId">
+    <div class="chat-window-header">
+      <div class="chat-header-content">
+        <div class="chat-avatar">B</div>
+        <div class="chat-header-info">
+          <h3>Betina</h3>
+          <p>Asistente de Recomendaciones</p>
+        </div>
+      </div>
+      <button class="close-button" (click)="toggleChat()" aria-label="Cerrar chat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="error-message">
+      <p>Dialogflow no está configurado. Por favor, configura los datos de Dialogflow en environment.ts</p>
+      <p><strong>Project ID:</strong> {{ dialogflowConfig?.projectId || 'No configurado' }}</p>
+      <p><strong>Agent ID:</strong> {{ dialogflowConfig?.agentId || 'No configurado' }}</p>
+    </div>
+  </div>
+</div>
+

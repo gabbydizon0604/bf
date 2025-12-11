@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,8 @@ import { FooterAccountPageComponent } from './shared/pages/footer-account-page/f
 import { BodyHomePageComponent } from './shared/pages/body-home-page/body-home-page.component';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import { BetinaChatWidgetComponent } from './shared/components/betina-chat-widget/betina-chat-widget.component';
+import { BetinaChatWidgetDialogflowComponent } from './shared/components/betina-chat-widget-dialogflow/betina-chat-widget-dialogflow.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     BodyPageComponent,
     HeaderAccountPageComponent,
     FooterAccountPageComponent,
-    BodyAccountPageComponent
+    BodyAccountPageComponent,
+    BetinaChatWidgetComponent,
+    BetinaChatWidgetDialogflowComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +52,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Allow custom elements like df-messenger
 })
 export class AppModule { }

@@ -17,14 +17,25 @@ export class InterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this._authService.cargarStorage();
-    this._fuseSplashScreenService.show();
+    
+    // Check if this is a chatbot API request - don't show splash screen for chatbot
+    const isChatbotRequest = req.url.includes('/api/chatbot/');
+    
+    // Only show splash screen for non-chatbot requests
+    if (!isChatbotRequest) {
+      this._fuseSplashScreenService.show();
+    }
+    
     return next.handle(req.clone({
       setHeaders: {
         Authorization: Constantes.tipoSeguridad.bearToken + this._authService.usuarioConectado.token
       }
     })).pipe(
       finalize(() => {
-        this._fuseSplashScreenService.hide();
+        // Only hide splash screen if we showed it (non-chatbot requests)
+        if (!isChatbotRequest) {
+          this._fuseSplashScreenService.hide();
+        }
       }
       )
     );

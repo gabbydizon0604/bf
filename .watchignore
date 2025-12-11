@@ -1,0 +1,8 @@
+# System folders to ignore
+System Volume Information
+$RECYCLE.BIN
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+

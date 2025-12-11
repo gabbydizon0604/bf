@@ -1,0 +1,77 @@
+<div class="betina-chat-widget">
+  <!-- Chat Button -->
+  <button 
+    class="chat-button" 
+    (click)="toggleChat()"
+    [class.open]="isOpen"
+    aria-label="Abrir chat con Betina">
+    <svg *ngIf="!isOpen" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg *ngIf="isOpen" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span class="chat-badge" *ngIf="!isOpen">Betina</span>
+  </button>
+
+  <!-- Chat Window -->
+  <div class="chat-window" [class.open]="isOpen">
+    <!-- Chat Header -->
+    <div class="chat-header">
+      <div class="chat-header-content">
+        <div class="chat-avatar">B</div>
+        <div class="chat-header-info">
+          <h3>Betina</h3>
+          <p>Asistente de Recomendaciones</p>
+        </div>
+      </div>
+      <button class="close-button" (click)="toggleChat()" aria-label="Cerrar chat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Messages Container -->
+    <div class="messages-container" #messagesContainer>
+      <div 
+        *ngFor="let message of messages" 
+        class="message"
+        [class.user-message]="message.isUser"
+        [class.bot-message]="!message.isUser"
+        [class.loading]="message.isLoading">
+        <div class="message-content">
+          <div *ngIf="message.isLoading" class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div *ngIf="!message.isLoading" [innerHTML]="formatMessage(message.message)"></div>
+        </div>
+        <div class="message-time">{{ message.timestamp | date:'short' }}</div>
+      </div>
+    </div>
+
+    <!-- Input Container -->
+    <div class="input-container">
+      <input 
+        type="text" 
+        #messageInput
+        [(ngModel)]="currentMessage"
+        (keypress)="onKeyPress($event)"
+        placeholder="Escribe tu mensaje..."
+        [disabled]="isLoading"
+        class="message-input">
+      <button 
+        (click)="sendMessage()" 
+        [disabled]="!currentMessage.trim() || isLoading"
+        class="send-button"
+        aria-label="Enviar mensaje">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+

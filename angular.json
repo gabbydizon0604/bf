@@ -73,18 +73,38 @@
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true
+                        },
+                        "hmr": {
+                            "buildOptimizer": false,
+                            "optimization": false,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": true,
+                            "namedChunks": true
                         }
                     },
                     "defaultConfiguration": "production"
                 },
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "hmr": true,
+                        "host": "0.0.0.0",
+                        "port": 4200,
+                        "poll": 2000,
+                        "disableHostCheck": true
+                    },
                     "configurations": {
                         "production": {
                             "browserTarget": "frontSolbet:build:production"
                         },
                         "development": {
-                            "browserTarget": "frontSolbet:build:development"
+                            "browserTarget": "frontSolbet:build:development",
+                            "hmr": true
+                        },
+                        "hmr": {
+                            "browserTarget": "frontSolbet:build:hmr",
+                            "hmr": true
                         }
                     },
                     "defaultConfiguration": "development"

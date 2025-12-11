@@ -36,6 +36,12 @@ export class Constantes {
         prioridadpartidos: {
             getCriterio: '/api/prioridadpartidos/getCriterio'
         },
+        chatbot: {
+            Query: '/api/chatbot/query',
+            Search: '/api/chatbot/search',
+            FAQs: '/api/chatbot/faqs',
+            KnowledgeBase: '/api/chatbot/knowledge-base'
+        },
     }
     static culqi = {
         auth: {

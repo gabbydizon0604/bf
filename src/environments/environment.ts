@@ -2,14 +2,26 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
+import { Environment } from './environment.interface';
+
+export const environment: Environment = {
   production: false,
   hmr: false,
   name: 'DESARROLLO',
   PORT: 3000,
-  // urlIntegracion: 'http://localhost:3010'
-  urlIntegracion: 'https://apianabet.herokuapp.com',
-  // urlIntegracion: 'https://dev-apianabet-56f3650bc0aa.herokuapp.com'
+  urlIntegracion: 'http://localhost:3010',
+  // urlIntegracion: 'https://apianabet.herokuapp.com',
+  // urlIntegracion: 'https://dev-apianabet-56f3650bc0aa.herokuapp.com',
+  
+  // Dialogflow Configuration
+  dialogflow: {
+    enabled: true, // Set to false to use direct API instead of Dialogflow
+    useIframe: true, // Set to true for iframe Messenger, false for custom UI with SDK
+    projectId: '', // Set your Dialogflow project ID (e.g., 'bettics-betina-chatbot')
+    agentId: '', // Set your Dialogflow agent ID (usually same as projectId)
+    location: 'us-central1', // Dialogflow location
+    languageCode: 'es' // Language code (Spanish)
+  }
 };
 
 /*
