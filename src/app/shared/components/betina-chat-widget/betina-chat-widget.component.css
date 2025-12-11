@@ -73,6 +73,14 @@
 }
 
 /* Chat Header */
+.chat-header,
+.chat-header * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  cursor: default;
+}
+
 .chat-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -81,23 +89,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* Disable text selection */
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  cursor: default;
 }
 
 .chat-header-content {
   display: flex;
   align-items: center;
   gap: 12px;
-  /* Disable text selection */
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 
 .chat-avatar {
@@ -110,41 +107,18 @@
   justify-content: center;
   font-size: 20px;
   font-weight: bold;
-  /* Disable text selection */
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-.chat-header-info {
-  /* Disable text selection */
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 
 .chat-header-info h3 {
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  /* Disable text selection */
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 
 .chat-header-info p {
   margin: 4px 0 0 0;
   font-size: 12px;
   opacity: 0.9;
-  /* Disable text selection */
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 
 /* Prevent selection styling in header even if somehow selected */
@@ -238,15 +212,11 @@
   border-radius: 18px;
   word-wrap: break-word;
   line-height: 1.5;
-  /* Enable text selection */
   user-select: text;
   -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
   cursor: text;
 }
 
-/* Text selection styling - Make selected text visible */
 .message-content::selection,
 .message-content *::selection {
   background-color: #667eea;
@@ -272,8 +242,7 @@
   color: white;
 }
 
-.user-message .message-content::-moz-selection,
-.user-message .message-content *::-moz-selection {
+.user-message .message-content::-moz-selection {
   background-color: rgba(255, 255, 255, 0.4);
   color: white;
 }
@@ -292,8 +261,7 @@
   color: white;
 }
 
-.bot-message .message-content::-moz-selection,
-.bot-message .message-content *::-moz-selection {
+.bot-message .message-content::-moz-selection {
   background-color: #667eea;
   color: white;
 }
