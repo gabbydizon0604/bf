@@ -33,10 +33,10 @@
     
     <!-- Dialogflow Messenger Component -->
     <df-messenger
-      [attr.project-id]="dialogflowConfig?.projectId || ''"
-      [attr.agent-id]="dialogflowConfig?.agentId || dialogflowConfig?.projectId || ''"
-      [attr.language-code]="dialogflowConfig?.languageCode || 'es'"
-      [attr.location-id]="dialogflowConfig?.location || 'us-central1'"
+      [attr.project-id]="dialogflowConfig.projectId || ''"
+      [attr.agent-id]="dialogflowConfig.agentId || dialogflowConfig.projectId || ''"
+      [attr.language-code]="dialogflowConfig.languageCode || 'es'"
+      [attr.location-id]="dialogflowConfig.location || 'us-central1'"
       intent="WELCOME"
       chat-title="Betina"
       placeholder="Escribe tu mensaje..."
@@ -62,8 +62,8 @@
     </div>
     <div class="error-message">
       <p>Dialogflow no está configurado. Por favor, configura los datos de Dialogflow en environment.ts</p>
-      <p><strong>Project ID:</strong> {{ dialogflowConfig?.projectId || 'No configurado' }}</p>
-      <p><strong>Agent ID:</strong> {{ dialogflowConfig?.agentId || 'No configurado' }}</p>
+      <p><strong>Project ID:</strong> {{ dialogflowConfig.projectId || 'No configurado' }}</p>
+      <p><strong>Agent ID:</strong> {{ dialogflowConfig.agentId || 'No configurado' }}</p>
     </div>
   </div>
 </div>
