@@ -7,98 +7,159 @@
     <!-- mobile setting -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-TVQFXM63');</script>
-    <!-- End Google Tag Manager -->
-
+    <!-- Analytics Scripts - Only load in production (not on localhost) -->
     <script>
-        (function (w, d, t, r, u) {
-            var f, n, i;
-            w[u] = w[u] || [], f = function () {
-                var o = { ti: "97110534", enableAutoSpaTracking: true };
-                o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad")
-            },
-                n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () {
-                    var s = this.readyState;
-                    s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null)
-                },
-                i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i)
-        })
-            (window, document, "script", "//bat.bing.com/bat.js", "uetq");
-    </script>
-
-
-    <script type="text/javascript" src="https://tag.oniad.com/346faeb2-e142-11ee-b033-c1c8d6a481fa/" async defer></script>
-
-    <script type="text/javascript" src="https://tag.oniad.com/346faeb2-e142-11ee-b033-c1c8d6a481fa_engagement/" async defer></script>
-
-    <script type="text/javascript" src="https://tag.oniad.com/346faeb2-e142-11ee-b033-c1c8d6a481fa_conversion1/" async defer></script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11440670269"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'AW-11440670269');
-    </script>
-
-    <!-- Google Tag Manager -->
-    <script>
-        (function (w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-P5G92J9X');
-    </script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Meta Pixel Code -->
-    <script>
-        ! function (f, b, e, v, n, t, s) {
-            if (f.fbq) return;
-            n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        // Check if we're in development (localhost or 127.0.0.1)
+        var isDevelopment = window.location.hostname === 'localhost' || 
+                           window.location.hostname === '127.0.0.1' || 
+                           window.location.hostname === '';
+        
+        // Suppress analytics errors in development
+        if (isDevelopment) {
+            // Suppress console errors for analytics scripts
+            var originalError = console.error;
+            console.error = function() {
+                var args = Array.prototype.slice.call(arguments);
+                var errorStr = args.join(' ');
+                // Suppress known analytics errors
+                if (errorStr.includes('fbevents') || 
+                    errorStr.includes('clarity') || 
+                    errorStr.includes('ERR_TIMED_OUT') ||
+                    errorStr.includes('CORS policy') ||
+                    errorStr.includes('connect.facebook.net') ||
+                    errorStr.includes('o.clarity.ms') ||
+                    errorStr.includes('ERR_FAILED') ||
+                    errorStr.includes('Bad Request')) {
+                    return; // Suppress these errors
+                }
+                // Log other errors normally
+                originalError.apply(console, args);
             };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '2562268983943192');
-        fbq('track', 'PageView');
-    </script>
+            
+            // Suppress unhandled promise rejections from analytics
+            window.addEventListener('unhandledrejection', function(event) {
+                var reason = event.reason && event.reason.toString();
+                if (reason && (
+                    reason.includes('fbevents') || 
+                    reason.includes('clarity') || 
+                    reason.includes('connect.facebook.net') ||
+                    reason.includes('o.clarity.ms')
+                )) {
+                    event.preventDefault(); // Suppress the error
+                    return false;
+                }
+            });
+            
+            // Suppress global errors from analytics scripts
+            window.addEventListener('error', function(event) {
+                var src = event.target && event.target.src;
+                if (src && (
+                    src.includes('fbevents.js') || 
+                    src.includes('clarity') ||
+                    src.includes('connect.facebook.net')
+                )) {
+                    event.preventDefault();
+                    return false;
+                }
+            }, true);
+        }
+        
+        if (!isDevelopment) {
+            // Google Tag Manager
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start':
+                        new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-TVQFXM63');
 
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2562268983943192&ev=PageView&noscript=1"></noscript>
-    <!-- End Meta Pixel Code -->
+            // Bing UET
+            (function (w, d, t, r, u) {
+                var f, n, i;
+                w[u] = w[u] || [], f = function () {
+                    var o = { ti: "97110534", enableAutoSpaTracking: true };
+                    o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad")
+                },
+                    n = d.createElement(t), n.src = r, n.async = 1, n.onload = n.onreadystatechange = function () {
+                        var s = this.readyState;
+                        s && s !== "loaded" && s !== "complete" || (f(), n.onload = n.onreadystatechange = null)
+                    },
+                    i = d.getElementsByTagName(t)[0], i.parentNode.insertBefore(n, i)
+            })
+                (window, document, "script", "//bat.bing.com/bat.js", "uetq");
+
+            // Oniad Tags
+            var oniadScripts = [
+                'https://tag.oniad.com/346faeb2-e142-11ee-b033-c1c8d6a481fa/',
+                'https://tag.oniad.com/346faeb2-e142-11ee-b033-c1c8d6a481fa_engagement/',
+                'https://tag.oniad.com/346faeb2-e142-11ee-b033-c1c8d6a481fa_conversion1/'
+            ];
+            oniadScripts.forEach(function(src) {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = src;
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+            });
+
+            // Google Analytics (gtag.js)
+            var gtagScript = document.createElement('script');
+            gtagScript.async = true;
+            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-11440670269';
+            document.head.appendChild(gtagScript);
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'AW-11440670269');
+
+            // Google Tag Manager (second instance)
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js'
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-P5G92J9X');
+
+            // Meta Pixel Code (Facebook)
+            ! function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod ?
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+            if (typeof fbq !== 'undefined') {
+                fbq('init', '2562268983943192');
+                fbq('track', 'PageView');
+            }
+        }
+    </script>
+    <!-- End Analytics Scripts -->
 
     <meta charset="utf-8">
     <title> Bettics </title>
@@ -312,17 +373,22 @@
     <!-- / FUSE Splash Screen CSS -->
 
 
-<style>@import"https://fonts.googleapis.com/css?family=Oswald:400,300,600,900";@import"https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,300,700";@charset "UTF-8";:root{--bs-blue:#0d6efd;--bs-indigo:#6610f2;--bs-purple:#6f42c1;--bs-pink:#d63384;--bs-red:#dc3545;--bs-orange:#fd7e14;--bs-yellow:#ffc107;--bs-green:#198754;--bs-teal:#20c997;--bs-cyan:#0dcaf0;--bs-black:#000;--bs-white:#fff;--bs-gray:#6c757d;--bs-gray-dark:#343a40;--bs-gray-100:#f8f9fa;--bs-gray-200:#e9ecef;--bs-gray-300:#dee2e6;--bs-gray-400:#ced4da;--bs-gray-500:#adb5bd;--bs-gray-600:#6c757d;--bs-gray-700:#495057;--bs-gray-800:#343a40;--bs-gray-900:#212529;--bs-primary:#0d6efd;--bs-secondary:#6c757d;--bs-success:#198754;--bs-info:#0dcaf0;--bs-warning:#ffc107;--bs-danger:#dc3545;--bs-light:#f8f9fa;--bs-dark:#212529;--bs-primary-rgb:13,110,253;--bs-secondary-rgb:108,117,125;--bs-success-rgb:25,135,84;--bs-info-rgb:13,202,240;--bs-warning-rgb:255,193,7;--bs-danger-rgb:220,53,69;--bs-light-rgb:248,249,250;--bs-dark-rgb:33,37,41;--bs-white-rgb:255,255,255;--bs-black-rgb:0,0,0;--bs-body-color-rgb:33,37,41;--bs-body-bg-rgb:255,255,255;--bs-font-sans-serif:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--bs-font-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;--bs-gradient:linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));--bs-body-font-family:var(--bs-font-sans-serif);--bs-body-font-size:1rem;--bs-body-font-weight:400;--bs-body-line-height:1.5;--bs-body-color:#212529;--bs-body-bg:#fff;--bs-border-width:1px;--bs-border-style:solid;--bs-border-color:#dee2e6;--bs-border-color-translucent:rgba(0, 0, 0, .175);--bs-border-radius:.375rem;--bs-border-radius-sm:.25rem;--bs-border-radius-lg:.5rem;--bs-border-radius-xl:1rem;--bs-border-radius-2xl:2rem;--bs-border-radius-pill:50rem;--bs-link-color:#0d6efd;--bs-link-hover-color:#0a58ca;--bs-code-color:#d63384;--bs-highlight-bg:#fff3cd}*,:after,:before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:var(--bs-body-font-family);font-size:var(--bs-body-font-size);font-weight:var(--bs-body-font-weight);line-height:var(--bs-body-line-height);color:var(--bs-body-color);text-align:var(--bs-body-text-align);background-color:var(--bs-body-bg);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}img{vertical-align:middle}html{font:14px/20px Oswald;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;background:#ffffff;color:#363533}body{margin:0;padding:0!important}iframe,img{vertical-align:middle}img{max-width:100%;height:auto;box-sizing:border-box}img{border:0}iframe{border:0}@media print{*,*:before,*:after{background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important}img{page-break-inside:avoid}img{max-width:100%!important}@page{margin:.5cm}}</style><link rel="stylesheet" href="styles.432efd5d329a901e.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.432efd5d329a901e.css"></noscript></head>
+<style>@import"https://fonts.googleapis.com/css?family=Oswald:400,300,600,900";@import"https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,300,700";@charset "UTF-8";:root{--bs-blue:#0d6efd;--bs-indigo:#6610f2;--bs-purple:#6f42c1;--bs-pink:#d63384;--bs-red:#dc3545;--bs-orange:#fd7e14;--bs-yellow:#ffc107;--bs-green:#198754;--bs-teal:#20c997;--bs-cyan:#0dcaf0;--bs-black:#000;--bs-white:#fff;--bs-gray:#6c757d;--bs-gray-dark:#343a40;--bs-gray-100:#f8f9fa;--bs-gray-200:#e9ecef;--bs-gray-300:#dee2e6;--bs-gray-400:#ced4da;--bs-gray-500:#adb5bd;--bs-gray-600:#6c757d;--bs-gray-700:#495057;--bs-gray-800:#343a40;--bs-gray-900:#212529;--bs-primary:#0d6efd;--bs-secondary:#6c757d;--bs-success:#198754;--bs-info:#0dcaf0;--bs-warning:#ffc107;--bs-danger:#dc3545;--bs-light:#f8f9fa;--bs-dark:#212529;--bs-primary-rgb:13,110,253;--bs-secondary-rgb:108,117,125;--bs-success-rgb:25,135,84;--bs-info-rgb:13,202,240;--bs-warning-rgb:255,193,7;--bs-danger-rgb:220,53,69;--bs-light-rgb:248,249,250;--bs-dark-rgb:33,37,41;--bs-white-rgb:255,255,255;--bs-black-rgb:0,0,0;--bs-body-color-rgb:33,37,41;--bs-body-bg-rgb:255,255,255;--bs-font-sans-serif:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans","Liberation Sans",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--bs-font-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;--bs-gradient:linear-gradient(180deg, rgba(255, 255, 255, .15), rgba(255, 255, 255, 0));--bs-body-font-family:var(--bs-font-sans-serif);--bs-body-font-size:1rem;--bs-body-font-weight:400;--bs-body-line-height:1.5;--bs-body-color:#212529;--bs-body-bg:#fff;--bs-border-width:1px;--bs-border-style:solid;--bs-border-color:#dee2e6;--bs-border-color-translucent:rgba(0, 0, 0, .175);--bs-border-radius:.375rem;--bs-border-radius-sm:.25rem;--bs-border-radius-lg:.5rem;--bs-border-radius-xl:1rem;--bs-border-radius-2xl:2rem;--bs-border-radius-pill:50rem;--bs-link-color:#0d6efd;--bs-link-hover-color:#0a58ca;--bs-code-color:#d63384;--bs-highlight-bg:#fff3cd}*,:after,:before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:var(--bs-body-font-family);font-size:var(--bs-body-font-size);font-weight:var(--bs-body-font-weight);line-height:var(--bs-body-line-height);color:var(--bs-body-color);text-align:var(--bs-body-text-align);background-color:var(--bs-body-bg);-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}img{vertical-align:middle}html{font:14px/20px Oswald;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;background:#ffffff;color:#363533}body{margin:0;padding:0!important}img{vertical-align:middle}img{max-width:100%;height:auto;box-sizing:border-box}img{border:0}@media print{*,*:before,*:after{background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important}img{page-break-inside:avoid}img{max-width:100%!important}@page{margin:.5cm}}</style><link rel="stylesheet" href="styles.432efd5d329a901e.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.432efd5d329a901e.css"></noscript></head>
 
 <body id="top" class="home page-template-default page page-id-39 stretched rtl_columns av-curtain-numeric avia-responsive-images-support" itemscope="itemscope" itemtype="https://schema.org/WebPage">
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TVQFXM63" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P5G92J9X" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <!-- Analytics Noscript Tags - Only load in production -->
+    <script>
+        // Check if we're in development
+        var isDev = window.location.hostname === 'localhost' || 
+                   window.location.hostname === '127.0.0.1' || 
+                   window.location.hostname === '';
+        
+        if (!isDev) {
+            // Google Tag Manager noscript tags will be added dynamically in production
+            // For now, they're disabled in development to prevent errors
+        }
+    </script>
     <!-- FUSE Splash Screen -->
     <fuse-splash-screen id="fuse-splash-screen">
         <div class="center">
@@ -337,6 +403,10 @@
     </fuse-splash-screen>
     <app-root></app-root>
 
-<script src="runtime.fe6a1f16a2bd7713.js" type="module"></script><script src="polyfills.b186a2791b47cae5.js" type="module"></script><script src="scripts.456bfcc41272c37f.js" defer></script><script src="main.73ae29649d92e922.js" type="module"></script></body>
+    <!-- Dialogflow Messenger Script -->
+    <!-- Load Dialogflow Messenger for iframe integration -->
+    <script src="https://www.gstatic.com/dialogflow-console/frames/messenger/bootstrap.js" defer></script>
+
+<script src="runtime.1b3c13c68170bab1.js" type="module"></script><script src="polyfills.b186a2791b47cae5.js" type="module"></script><script src="scripts.456bfcc41272c37f.js" defer></script><script src="main.9ba8a660cede5260.js" type="module"></script></body>
 
 </html>

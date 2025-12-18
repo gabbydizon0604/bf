@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable, catchError, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -114,7 +115,7 @@ export class TerminoCondicionesComponent {
   }
 
   guardarLibroReclamaciones(data: any): Observable<any> {
-    const url = `https://prod-apies-accesos.herokuapp.com/api/libro-reclamaciones/registrar`;
+    const url = `${environment.urlIntegracion}/api/libro-reclamaciones/registrar`;
 
     return this._httpClient
       .post<any>(url, data, {})
@@ -131,7 +132,7 @@ export class TerminoCondicionesComponent {
   }
 
   consultaReclamo( ): Observable<any> {
-    const url = `https://prod-apies-accesos.herokuapp.com/api/libro-reclamaciones/get/${this.num_reclamo.value}`;
+    const url = `${environment.urlIntegracion}/api/libro-reclamaciones/get/${this.num_reclamo.value}`;
 
     return this._httpClient
       .get<any>(url, {})
