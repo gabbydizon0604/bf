@@ -19,10 +19,11 @@ const routes: Routes = [
     path: 'contacto', 
     component: ContactPageComponent
   },
-  {
-    path: 'termino-condiciones', 
-    component: TerminoCondicionesComponent
-  }
+  {path: 'termino-condiciones', component: TerminoCondicionesComponent},
+  /*{
+    path: '**',//TODO 404 cuando no existe la ruta
+    redirectTo: '/tracks'
+  }*/
 ];
 
 @NgModule({

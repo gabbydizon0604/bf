@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, of, throwError } from 'rxjs';
 import { Constantes } from 'src/app/core/data/constants';
 import { ResponseModel } from 'src/app/core/models/response.model';
 import { UsuarioModel } from 'src/app/core/models/usuario.model';
@@ -28,7 +28,7 @@ export class AuthService {
   logout(): void {
     this.usuarioConectado = new UsuarioModel();
     localStorage.removeItem('usuarioConectado');
-    this._router.navigate(['/auth/login']);
+    this._router.navigate(['/login']);
   }
 
   // tieneToken(): boolean {
@@ -69,8 +69,11 @@ export class AuthService {
           }
         }),
         catchError(err => {
-          this._swalAlertService.swalEventoUrgente({ mensaje: err.error.message })
-          throw new Error(err)
+          const errorMessage = err.error?.message || err.message || 'Error al iniciar sesión. Por favor, intente nuevamente.';
+          this._swalAlertService.swalEventoUrgente({ mensaje: errorMessage });
+          response.estado = false;
+          response.mensaje = errorMessage;
+          return of(response);
         })
       )
   }

@@ -21,11 +21,11 @@ export class GuardService  {
 
   checkUserLogin() : boolean {
     if(this._authService.usuarioConectado == undefined){
-      this._router.navigate(['/auth/login']);
+      this._router.navigate(['/auth/login'], { relativeTo: this._activatedRouted });
       return false;
     }
     else if(this._authService.usuarioConectado._id == null || this._authService.usuarioConectado._id == '') {
-      this._router.navigate(['/auth/login']);
+      this._router.navigate(['/auth/login'], { relativeTo: this._activatedRouted });
       return false;
     }
     else return true;

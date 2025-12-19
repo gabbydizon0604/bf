@@ -79,7 +79,7 @@ export class ResetPasswordPageComponent implements OnInit, OnDestroy {
       )
       .subscribe((response) => {
         this._swalAlertService.swalEventoExitoso({ mensaje: 'Su contraseña ha sido cambiado con éxito, vuelva ingresar a la plataforma' });
-        this._router.navigate(['/auth/login']);
+        this._router.navigate(['/auth/login'], { relativeTo: this._activatedRouted });
       });
   }
 
