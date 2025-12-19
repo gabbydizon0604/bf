@@ -52,9 +52,77 @@ export class AuthService {
   login(usuario: UsuarioModel, recordar: boolean = false): Observable<ResponseModel> {
     let response: ResponseModel = new ResponseModel();
     const url = this.urlAccesos + Constantes.api.auth.Login;
-    return this._httpClient.post(url, usuario)
+    
+    // Validate input before sending
+    if (!usuario.correoElectronico || !usuario.password) {
+      const errorMsg = !usuario.correoElectronico 
+        ? 'El correo electrónico es requerido.' 
+        : 'La contraseña es requerida.';
+      console.error('[AuthService] Validation failed:', errorMsg);
+      response.estado = false;
+      response.mensaje = errorMsg;
+      this._swalAlertService.swalEventoUrgente({ mensaje: errorMsg });
+      return of(response);
+    }
+    
+    // Prepare the request payload - only send what backend expects
+    // Backend DTO: { correoElectronico: string, password: string }
+    // Backend validation: if (!correoElectronico || !password) returns 400
+    // IMPORTANT: Password must NOT be trimmed - bcrypt.compareSync requires exact match
+    // Email is trimmed and lowercased to ensure consistent format
+    const emailTrimmed = usuario.correoElectronico.trim().toLowerCase();
+    
+    // Validate email after trimming (catches whitespace-only input)
+    if (!emailTrimmed) {
+      console.error('[AuthService] Validation failed: Email is empty after trimming');
+      response.estado = false;
+      response.mensaje = 'El correo electrónico es requerido.';
+      this._swalAlertService.swalEventoUrgente({ mensaje: 'El correo electrónico es requerido.' });
+      return of(response);
+    }
+    
+    const loginPayload = {
+      correoElectronico: emailTrimmed,
+      password: usuario.password  // DO NOT trim - preserves exact user input for bcrypt comparison
+    };
+    
+    // Log request details for debugging
+    console.log('[AuthService] ===== LOGIN REQUEST =====');
+    console.log('[AuthService] URL:', url);
+    console.log('[AuthService] Request Headers:', {
+      'Content-Type': 'application/json',
+      'Authorization': 'NOT SET (public endpoint)'
+    });
+    console.log('[AuthService] Request Payload (sanitized):', {
+      correoElectronico: loginPayload.correoElectronico ? 
+        `${loginPayload.correoElectronico.substring(0, 3)}***${loginPayload.correoElectronico.substring(loginPayload.correoElectronico.indexOf('@'))}` : 
+        'MISSING',
+      password: loginPayload.password ? '***' : 'MISSING',
+      hasEmail: !!loginPayload.correoElectronico,
+      hasPassword: !!loginPayload.password,
+      emailLength: loginPayload.correoElectronico?.length || 0,
+      passwordLength: loginPayload.password?.length || 0
+    });
+    console.log('[AuthService] Full payload JSON:', JSON.stringify(loginPayload));
+    console.log('[AuthService] =======================');
+    
+    return this._httpClient.post(url, loginPayload, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .pipe(
         map((resp: any) => {
+          console.log('[AuthService] ===== LOGIN RESPONSE =====');
+          console.log('[AuthService] Response status: SUCCESS');
+          console.log('[AuthService] Response has token:', !!resp.token);
+          console.log('[AuthService] Response has usuario:', !!resp.usuario);
+          if (resp.usuario) {
+            console.log('[AuthService] Usuario ID:', resp.usuario._id);
+            console.log('[AuthService] Usuario email:', resp.usuario.correoElectronico);
+          }
+          console.log('[AuthService] =======================');
+          
           if (resp.token) {
             if (recordar) {
               localStorage.setItem('email', usuario.correoElectronico);
@@ -76,7 +144,81 @@ export class AuthService {
           }
         }),
         catchError(err => {
-          const errorMessage = err.error?.message || err.message || 'Error al iniciar sesión. Por favor, intente nuevamente.';
+          console.error('[AuthService] ===== LOGIN ERROR =====');
+          console.error('[AuthService] Error status:', err.status);
+          console.error('[AuthService] Error statusText:', err.statusText);
+          console.error('[AuthService] Error URL:', err.url);
+          console.error('[AuthService] Error message:', err.message);
+          
+          // Log complete error.error object (backend response body)
+          console.error('[AuthService] ===== BACKEND ERROR RESPONSE =====');
+          if (err.error) {
+            console.error('[AuthService] Full error.error object:', err.error);
+            console.error('[AuthService] Error response (JSON):', JSON.stringify(err.error, null, 2));
+            
+            // Display backend validation messages if present
+            if (err.error.errors && typeof err.error.errors === 'object') {
+              console.error('[AuthService] ===== VALIDATION ERRORS =====');
+              const validationErrors = err.error.errors;
+              const errorFields = Object.keys(validationErrors);
+              
+              errorFields.forEach(field => {
+                const fieldErrors = validationErrors[field];
+                if (Array.isArray(fieldErrors)) {
+                  fieldErrors.forEach((errorMsg: string) => {
+                    console.error(`[AuthService] ❌ ${field}: ${errorMsg}`);
+                  });
+                } else {
+                  console.error(`[AuthService] ❌ ${field}:`, fieldErrors);
+                }
+              });
+              
+              console.error('[AuthService] =================================');
+            }
+            
+            // Log other error details
+            if (err.error.message) {
+              console.error('[AuthService] Error message:', err.error.message);
+            }
+            if (err.error.type) {
+              console.error('[AuthService] Error type:', err.error.type);
+            }
+            if (err.error.title) {
+              console.error('[AuthService] Error title:', err.error.title);
+            }
+            if (err.error.traceId) {
+              console.error('[AuthService] Trace ID:', err.error.traceId);
+            }
+          } else {
+            console.error('[AuthService] No error.error object found');
+          }
+          console.error('[AuthService] ========================================');
+          console.error('[AuthService] ========================================');
+          
+          // Extract user-friendly error message
+          let errorMessage = 'Error al iniciar sesión. Por favor, intente nuevamente.';
+          
+          // Prioritize validation error messages
+          if (err.error?.errors && typeof err.error.errors === 'object') {
+            const validationErrors = err.error.errors;
+            const errorFields = Object.keys(validationErrors);
+            
+            // Get first validation error message
+            if (errorFields.length > 0) {
+              const firstField = errorFields[0];
+              const firstFieldErrors = validationErrors[firstField];
+              if (Array.isArray(firstFieldErrors) && firstFieldErrors.length > 0) {
+                errorMessage = firstFieldErrors[0];
+              } else if (typeof firstFieldErrors === 'string') {
+                errorMessage = firstFieldErrors;
+              }
+            }
+          } else if (err.error?.message) {
+            errorMessage = err.error.message;
+          } else if (err.message) {
+            errorMessage = err.message;
+          }
+          
           this._swalAlertService.swalEventoUrgente({ mensaje: errorMessage });
           response.estado = false;
           response.mensaje = errorMessage;
