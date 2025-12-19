@@ -21,16 +21,41 @@ export class InterceptorService implements HttpInterceptor {
     // Check if this is a chatbot API request - don't show splash screen for chatbot
     const isChatbotRequest = req.url.includes('/api/chatbot/');
     
+    // List of public endpoints that don't require authentication
+    const publicEndpoints = [
+      '/api/Login/Login',
+      '/api/usuario/registrar',
+      '/api/forgorpassword/recuperarPasswordEmail',
+      '/api/forgorpassword/resetPassword',
+      '/api/email/enviarmensajesoporte',
+      '/api/libro-reclamaciones/registrar',
+      '/api/libro-reclamaciones/get'
+    ];
+    
+    // Check if this is a public endpoint (login, register, etc.)
+    const isPublicEndpoint = publicEndpoints.some(endpoint => req.url.includes(endpoint));
+    
     // Only show splash screen for non-chatbot requests
     if (!isChatbotRequest) {
       this._fuseSplashScreenService.show();
     }
     
-    return next.handle(req.clone({
-      setHeaders: {
-        Authorization: Constantes.tipoSeguridad.bearToken + this._authService.usuarioConectado.token
-      }
-    })).pipe(
+    // Only add Authorization header if:
+    // 1. It's not a public endpoint (login, register, etc.)
+    // 2. User has a valid token
+    const token = this._authService.usuarioConectado?.token;
+    const shouldAddAuth = !isPublicEndpoint && token;
+    
+    let clonedRequest = req;
+    if (shouldAddAuth) {
+      clonedRequest = req.clone({
+        setHeaders: {
+          Authorization: Constantes.tipoSeguridad.bearToken + token
+        }
+      });
+    }
+    
+    return next.handle(clonedRequest).pipe(
       finalize(() => {
         // Only hide splash screen if we showed it (non-chatbot requests)
         if (!isChatbotRequest) {
