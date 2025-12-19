@@ -22,11 +22,6 @@ const routes: Routes = [
   {
     path: 'termino-condiciones', 
     component: TerminoCondicionesComponent
-  },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
   }
 ];
 

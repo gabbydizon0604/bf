@@ -51,8 +51,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'recomendacion',
-    pathMatch: 'full'
+    redirectTo: 'recomendacion'
   }
 
 ];

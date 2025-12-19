@@ -87,16 +87,16 @@ export class LoginPageComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((response) => {
         if (response.estado) {
           if (this._authService.usuarioConectado.tipoLicencia == "gratis") {
-            this._router.navigate(['/cuenta/recomendacion'], { relativeTo: this._activatedRouted });
+            this._router.navigate(['/cuenta/recomendacion']);
           }
           else if (this._authService.usuarioConectado.suscripcionCulquiId != null)
-            this._router.navigate(['/cuenta/recomendacion'], { relativeTo: this._activatedRouted });
+            this._router.navigate(['/cuenta/recomendacion']);
           else {
 
             if (this._authService.usuarioConectado.billeteraMovilPagadoId != null) {
-              this._router.navigate(['/cuenta/recomendacion'], { relativeTo: this._activatedRouted });
+              this._router.navigate(['/cuenta/recomendacion']);
             } else {
-              this._router.navigate(['/cuenta/suscripcion'], { relativeTo: this._activatedRouted });
+              this._router.navigate(['/cuenta/suscripcion']);
             }
           }
         }
