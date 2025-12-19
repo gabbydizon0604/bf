@@ -28,7 +28,7 @@ export class AuthService {
   logout(): void {
     this.usuarioConectado = new UsuarioModel();
     localStorage.removeItem('usuarioConectado');
-    this._router.navigate(['/login']);
+    this._router.navigate(['/auth/login']);
   }
 
   // tieneToken(): boolean {

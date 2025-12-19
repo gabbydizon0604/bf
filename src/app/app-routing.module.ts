@@ -9,12 +9,12 @@ import { BodyHomePageComponent } from './shared/pages/body-home-page/body-home-p
 const routes: Routes = [
   {
     path: 'auth',
-    loadChildren: () => import(`./main/auth/auth.module`).then(m => m.AuthModule),
+    loadChildren: () => import('./main/auth/auth.module').then(m => m.AuthModule),
   },
   {
     path: 'cuenta',
     component: BodyAccountPageComponent,
-    loadChildren: () => import(`./main/account/account.module`).then(m => m.AccountModule),
+    loadChildren: () => import('./main/account/account.module').then(m => m.AccountModule),
     canActivate: [LoginGuardGuard]
 
   },
@@ -48,6 +48,11 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

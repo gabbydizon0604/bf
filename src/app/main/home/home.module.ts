@@ -8,13 +8,15 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BodyHomePageComponent } from 'src/app/shared/pages/body-home-page/body-home-page.component';
+import { TerminoCondicionesComponent } from 'src/app/shared/pages/terminos-condiciones/terminos-condiciones.component';
 
 @NgModule({
   declarations: [
     HomePageComponent,
     AboutPageComponent,
     ContactPageComponent,
-    BodyHomePageComponent
+    BodyHomePageComponent,
+    TerminoCondicionesComponent
   ],
   imports: [
     CommonModule,

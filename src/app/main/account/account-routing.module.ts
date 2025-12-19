@@ -39,6 +39,15 @@ const routes: Routes = [
     component: ResultadosPageComponent,
     canActivate: [GuardService]
   },
+  {
+    path: '',
+    redirectTo: 'recomendacion',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'recomendacion'
+  }
 
 ];
 

@@ -16,23 +16,33 @@ export class GuardService  {
     }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    console.log('[GuardService] Checking route access:', state.url);
     // Ensure storage is loaded before checking
     this._authService.cargarStorage();
-    return this.checkUserLogin();
+    const result = this.checkUserLogin(state.url);
+    console.log('[GuardService] Route access result:', result ? 'ALLOWED' : 'DENIED');
+    return result;
   }
 
-  checkUserLogin() : boolean {
+  checkUserLogin(attemptedUrl: string): boolean {
     // Load storage to ensure we have the latest user data
     this._authService.cargarStorage();
     
     if(this._authService.usuarioConectado == undefined || this._authService.usuarioConectado == null){
+      console.log('[GuardService] Access DENIED: User not connected. Redirecting to /auth/login');
+      console.log('[GuardService] Attempted URL:', attemptedUrl);
       this._router.navigate(['/auth/login']);
       return false;
     }
     else if(this._authService.usuarioConectado._id == null || this._authService.usuarioConectado._id == '') {
+      console.log('[GuardService] Access DENIED: User ID is null or empty. Redirecting to /auth/login');
+      console.log('[GuardService] Attempted URL:', attemptedUrl);
       this._router.navigate(['/auth/login']);
       return false;
     }
-    else return true;
+    else {
+      console.log('[GuardService] Access ALLOWED: User authenticated. User ID:', this._authService.usuarioConectado._id);
+      return true;
+    }
   }
 } 
