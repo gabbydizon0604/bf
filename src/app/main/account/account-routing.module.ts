@@ -43,6 +43,16 @@ const routes: Routes = [
     path: 'posiciones',
     component: TableroPosicionesPageComponent,
     canActivate: [GuardService]
+  },
+  {
+    path: '',
+    redirectTo: 'recomendacion',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'recomendacion',
+    pathMatch: 'full'
   }
 
 ];
