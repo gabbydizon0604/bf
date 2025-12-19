@@ -87,22 +87,26 @@ export class LoginPageComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((response) => {
         if (response.estado) {
           if (this._authService.usuarioConectado.tipoLicencia == "gratis") {
-            this._router.navigate(['/cuenta/recomendacion'], { relativeTo: this._activatedRouted });
+            this._router.navigate(['/cuenta/recomendacion']);
           }
-          else if (this._authService.usuarioConectado.suscripcionCulquiId != null)
-            this._router.navigate(['/cuenta/recomendacion'], { relativeTo: this._activatedRouted });
+          else if (this._authService.usuarioConectado.suscripcionCulquiId != null) {
+            this._router.navigate(['/cuenta/recomendacion']);
+          }
           else {
-
             if (this._authService.usuarioConectado.billeteraMovilPagadoId != null) {
-              this._router.navigate(['/cuenta/recomendacion'], { relativeTo: this._activatedRouted });
+              this._router.navigate(['/cuenta/recomendacion']);
             } else {
-              this._router.navigate(['/cuenta/suscripcion'], { relativeTo: this._activatedRouted });
+              this._router.navigate(['/cuenta/suscripcion']);
             }
           }
         }
         else {
           this._swalAlertService.swalEventoUrgente({ mensaje: response.mensaje });
         }
+      }, (error) => {
+        // Handle subscription errors
+        console.error('Login subscription error:', error);
+        this._swalAlertService.swalEventoUrgente({ mensaje: 'Error al procesar el login. Por favor, intente nuevamente.' });
       });
   }
 
