@@ -16,16 +16,21 @@ export class GuardService  {
     }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    // Ensure storage is loaded before checking
+    this._authService.cargarStorage();
     return this.checkUserLogin();
   }
 
   checkUserLogin() : boolean {
-    if(this._authService.usuarioConectado == undefined){
-      this._router.navigate(['/auth/login'], { relativeTo: this._activatedRouted });
+    // Load storage to ensure we have the latest user data
+    this._authService.cargarStorage();
+    
+    if(this._authService.usuarioConectado == undefined || this._authService.usuarioConectado == null){
+      this._router.navigate(['/auth/login']);
       return false;
     }
     else if(this._authService.usuarioConectado._id == null || this._authService.usuarioConectado._id == '') {
-      this._router.navigate(['/auth/login'], { relativeTo: this._activatedRouted });
+      this._router.navigate(['/auth/login']);
       return false;
     }
     else return true;

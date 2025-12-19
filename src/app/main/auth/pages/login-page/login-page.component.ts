@@ -86,19 +86,25 @@ export class LoginPageComponent implements OnInit, AfterViewInit, OnDestroy {
       )
       .subscribe((response) => {
         if (response.estado) {
-          if (this._authService.usuarioConectado.tipoLicencia == "gratis") {
-            this._router.navigate(['/cuenta/recomendacion']);
-          }
-          else if (this._authService.usuarioConectado.suscripcionCulquiId != null) {
-            this._router.navigate(['/cuenta/recomendacion']);
-          }
-          else {
-            if (this._authService.usuarioConectado.billeteraMovilPagadoId != null) {
+          // Ensure storage is synced before navigation
+          this._authService.cargarStorage();
+          
+          // Use setTimeout to ensure the guard sees the updated auth state
+          setTimeout(() => {
+            if (this._authService.usuarioConectado.tipoLicencia == "gratis") {
               this._router.navigate(['/cuenta/recomendacion']);
-            } else {
-              this._router.navigate(['/cuenta/suscripcion']);
             }
-          }
+            else if (this._authService.usuarioConectado.suscripcionCulquiId != null) {
+              this._router.navigate(['/cuenta/recomendacion']);
+            }
+            else {
+              if (this._authService.usuarioConectado.billeteraMovilPagadoId != null) {
+                this._router.navigate(['/cuenta/recomendacion']);
+              } else {
+                this._router.navigate(['/cuenta/suscripcion']);
+              }
+            }
+          }, 0);
         }
         else {
           this._swalAlertService.swalEventoUrgente({ mensaje: response.mensaje });

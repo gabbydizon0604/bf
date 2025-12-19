@@ -36,7 +36,14 @@ export class AuthService {
   // }
 
   isAuthenticated(): boolean {
-    const token = this.usuarioConectado.token;
+    // First ensure we have loaded from storage
+    if (!this.usuarioConectado || !this.usuarioConectado.token) {
+      this.cargarStorage();
+    }
+    const token = this.usuarioConectado?.token;
+    if (!token) {
+      return false;
+    }
     // Check whether the token is expired and return
     // true or false
     return !this.jwtHelper.isTokenExpired(token);
@@ -98,14 +105,27 @@ export class AuthService {
   }
 
   cargarStorage(): void {
-
     if (localStorage.getItem('usuarioConectado')) {
-
       let data = localStorage.getItem('usuarioConectado');
-      if (data)
-        this.usuarioConectado = JSON.parse(data);
+      if (data) {
+        try {
+          this.usuarioConectado = JSON.parse(data);
+          // Also load token from localStorage if available
+          const token = localStorage.getItem('token');
+          if (token && this.usuarioConectado) {
+            this.usuarioConectado.token = token;
+          }
+        } catch (error) {
+          console.error('Error parsing usuarioConectado from localStorage:', error);
+          this.usuarioConectado = new UsuarioModel();
+        }
+      }
     } else {
-
+      // Load token if available even without usuarioConectado
+      const token = localStorage.getItem('token');
+      if (token && this.usuarioConectado) {
+        this.usuarioConectado.token = token;
+      }
     }
   }
 
